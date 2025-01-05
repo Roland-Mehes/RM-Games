@@ -1,0 +1,41 @@
+.benefits {
+  padding: 40px 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(142, 45, 226, 0.8),
+    rgba(74, 0, 224, 0.8)
+  );
+  color: white;
+  text-align: center;
+}
+
+.benefits h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.benefits ul {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 800px;
+  text-align: left;
+}
+
+.benefits li {
+  font-size: 1.2rem;
+  margin: 10px 0;
+  padding-left: 40px;
+  position: relative;
+  line-height: 1.6;
+}
+
+.benefits li::before {
+  content: '🌟';
+  color: #ffc107;
+  font-size: 1.5rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
