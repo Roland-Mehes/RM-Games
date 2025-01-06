@@ -13,9 +13,6 @@ const Benefits = () => {
         {benefitsContent?.map((content, idx) => (
           <li key={idx}>{content}</li>
         ))}
-        {/* <li>Fejleszti a logikai gondolkodást</li>
-        <li>Kihívások minden nap</li>
-        <li>Kiváló a szórakozásra és az agytornáztatásra</li> */}
       </ul>
     </section>
   );

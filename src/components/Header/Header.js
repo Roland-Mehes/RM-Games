@@ -34,7 +34,7 @@ const Header = () => {
     <header className="header">
       <div className="header-content">
         <div className="logo">
-          <Link to="/">MR-Game App</Link>
+          <Link to="/">rm-Game App</Link>
         </div>
         <div className="hamburger" onClick={toggleMenu}>
           <span className="bar"></span>
