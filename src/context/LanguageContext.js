@@ -15,28 +15,12 @@ import {
 const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-  const [selectedLanguage, setSelectedLanguage] = useState(
-    localStorage.getItem('language') || 'English'
-  );
+  const lStore = localStorage.getItem('language') || 'English'; // just to keep selectedLanguage in one line ....
+
+  const [selectedLanguage, setSelectedLanguage] = useState(lStore);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState('');
-  // const [selectedWords, setSelectedWords] = useState([]);
-  // const [howToPlay, setHowToPlay] = useState('');
-  // const [gameButton, setGameButton] = useState();
-  // const [LogoutButton, setLogoutButton] = useState();
-  // const [records, setRecords] = useState();
-  // const [wins, setWins] = useState();
-  // const [losses, setLosses] = useState();
-
-  const [languageData, setLanguageData] = useState({
-    selectedWords: [],
-    howToPlay: '',
-    gameButton: '',
-    logoutButton: '',
-    records: '',
-    wins: '',
-    losses: '',
-  });
+  const [languageData, setLanguageData] = useState({});
 
   const languages = {
     English: { data: enData, lang: enLang },
@@ -45,23 +29,26 @@ export const LanguageProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const data = languages[selectedLanguage];
-    if (data) {
-      // setSelectedWords(languageData.words);
-      // setHowToPlay(languageData.howToPlay);
-      // setGameButton(languageData.gameBut ton);
-      // setLogoutButton(languageData.LogoutButton);
-      // setRecords(languageData.records);
-      // setWins(languageData.wins);
-      // setLosses(languageData.losses);
+    const langData = languages[selectedLanguage];
+    if (langData) {
       setLanguageData({
-        selectedWords: data.data.words,
-        howToPlay: data.howToPlay,
-        gameButton: data.gameButton,
-        logoutButton: data.LogoutButton,
-        records: data.records,
-        wins: data.wins,
-        losses: data.losses,
+        //Header
+        gameButton: langData.gameButton,
+        logoutButton: langData.LogoutButton,
+        records: langData.records,
+        //Wordle
+        selectedWords: langData.data.words,
+        wins: langData.wins,
+        losses: langData.losses,
+        //Landing Page Hero section
+        heroTextHeader: langData.lang.heroTextHeader,
+        heroTextParagraph: langData.lang.heroTextParagraph,
+        //Landing Page Game Section
+        gameSectionHeader: langData.lang.gameSectionHeader,
+        playBtn: langData.lang.playBtn,
+        // Landing Page Benefits
+        benefitsHeader: langData.lang.benefitsHeader,
+        benefitsContent: langData.lang.benefitsContent,
       });
     }
     localStorage.setItem('language', selectedLanguage);
@@ -76,14 +63,7 @@ export const LanguageProvider = ({ children }) => {
     userName,
     setUserName,
     languages,
-    languageData, // now is one instead over nince thousand ...
-    // selectedWords,
-    // howToPlay,
-    // gameButton,
-    // LogoutButton,
-    // records,
-    // wins,
-    // losses,
+    languageData,
   };
 
   return (

@@ -1,14 +1,21 @@
 import React from 'react';
 import './Benefits.css';
+import { Ctx } from '../../context/LanguageContext';
 
 const Benefits = () => {
+  const { languageData } = Ctx();
+  const { benefitsHeader, benefitsContent } = languageData;
+
   return (
     <section className="benefits">
-      <h2>Miért érdemes játszani?</h2>
+      <h2>{benefitsHeader}</h2>
       <ul>
-        <li>Fejleszti a logikai gondolkodást</li>
+        {benefitsContent?.map((content, idx) => (
+          <li key={idx}>{content}</li>
+        ))}
+        {/* <li>Fejleszti a logikai gondolkodást</li>
         <li>Kihívások minden nap</li>
-        <li>Kiváló a szórakozásra és az agytornáztatásra</li>
+        <li>Kiváló a szórakozásra és az agytornáztatásra</li> */}
       </ul>
     </section>
   );

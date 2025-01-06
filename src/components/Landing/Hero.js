@@ -1,15 +1,16 @@
 import React from 'react';
 import './Hero.css';
+import { Ctx } from '../../context/LanguageContext';
 
 const Hero = () => {
+  const { languageData } = Ctx();
+  const { heroTextHeader, heroTextParagraph } = languageData;
+
   return (
     <section className="hero">
       <div className="hero-content">
-        <h1>Játssz a kedvenc logikai játékaiddal!</h1>
-        <p>
-          Fedezd fel a Wordle-t és más szórakoztató logikai játékokat. Napi
-          kihívások és szórakoztató rejtvények várnak rád!
-        </p>
+        <h1>{heroTextHeader}</h1>
+        <p>{heroTextParagraph}</p>
       </div>
     </section>
   );

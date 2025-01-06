@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Ctx } from '../../../context/LanguageContext'; // Importing the context
+import { Ctx } from '../../../context/LanguageContext';
 import Line from './Line';
 import './game.css';
 

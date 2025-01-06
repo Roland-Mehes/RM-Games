@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './GamesSection.css';
+import { Ctx } from '../../context/LanguageContext';
 
 const GameCard = ({
   title,
@@ -9,25 +10,37 @@ const GameCard = ({
   imgSrc,
   imgWidth,
   imgHeight,
-}) => (
-  <div className="game-card">
-    <h3>{title}</h3>
-    <img
-      src={imgSrc}
-      alt="img"
-      style={{ width: imgWidth, height: imgHeight, margin: 'auto' }}
-    ></img>
-    {/* <p>{description}</p> */}
-    <Link to={link} className="play-button">
-      Játssz most!
-    </Link>
-  </div>
-);
+  BtnDisabled,
+}) => {
+  const { languageData } = Ctx();
+  const { playBtn } = languageData;
+
+  return (
+    <div className="game-card">
+      <h3>{title}</h3>
+      <img
+        src={imgSrc}
+        alt="img"
+        style={{ width: imgWidth, height: imgHeight, margin: 'auto' }}
+      ></img>
+      {/* <p>{description}</p> */}
+      <Link
+        to={BtnDisabled ? '#' : link}
+        className={BtnDisabled ? 'play-button disabled' : 'play-button'}
+      >
+        {playBtn}
+      </Link>
+    </div>
+  );
+};
 
 const GamesSection = () => {
+  const { languageData } = Ctx();
+  const { gameSectionHeader } = languageData;
+
   return (
     <section className="games-section">
-      <h2>Játékok</h2>
+      <h2>{gameSectionHeader}</h2>
       <div className="games-list">
         <GameCard
           title="Wordle"
@@ -44,6 +57,7 @@ const GamesSection = () => {
           imgHeight="70px"
           // description=""
           link="/sudoku"
+          BtnDisabled={true}
         />
         <GameCard
           title="Memória játék"
@@ -52,6 +66,7 @@ const GamesSection = () => {
           imgHeight="70px"
           // description=""
           link="/memory"
+          BtnDisabled={true}
         />
       </div>
     </section>

@@ -1,5 +1,29 @@
 import { wordsList } from './enWordsList';
 
+export const webLang = {
+  // text for header
+  gameButton: 'Game',
+  LogoutButton: 'Logout',
+  records: 'Records',
+
+  // text for the Hero section
+  heroTextHeader: 'Play your favorite logic games!',
+  heroTextParagraph:
+    'Discover Wordle and other fun logic games. Daily challenges and entertaining puzzles await you!',
+
+  // text for the Game section
+  gameSectionHeader: 'Top Games',
+  playBtn: 'Play Now!',
+
+  //text for benefits
+  benefitsHeader: 'Why is it worth playing??',
+  benefitsContent: [
+    'Develops logical thinking',
+    'Challenges every day',
+    'Excellent for fun and brain exercise',
+  ],
+};
+
 export const wordleLang = {
   words: wordsList
     .trim()
@@ -9,10 +33,4 @@ export const wordleLang = {
 
   wins: 'Wins',
   losses: 'Losses',
-};
-
-export const webLang = {
-  gameButton: 'Game',
-  LogoutButton: 'Logout',
-  records: 'Records',
 };

@@ -44,7 +44,7 @@
 
 .game-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
 }
 
 .game-card h3 {
@@ -74,4 +74,11 @@
 .play-button:hover {
   background-color: #218838;
   color: #000;
+}
+
+.play-button.disabled {
+  background-color: #ccc;
+  color: #666;
+  pointer-events: none;
+  cursor: not-allowed;
 }
