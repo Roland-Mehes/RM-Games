@@ -86,7 +86,10 @@ const Wordle = () => {
         }
       }
 
-      if (currentGuess.length < 5 && /^[a-z]{1}$/i.test(event.key)) {
+      if (
+        currentGuess.length < 5 &&
+        /^[a-záéíóöőúüűăâîşţ]{1}$/i.test(event.key)
+      ) {
         setCurrentGuess((oldGuess) => oldGuess + event.key.toLowerCase());
       }
     };
