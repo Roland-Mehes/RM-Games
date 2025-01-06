@@ -1,10 +1,14 @@
 import React from 'react';
 import './game.css';
 
-const Line = ({ guess, isFinal, solution }) => {
+const Line = ({ guess, isFinal, solution, isError }) => {
   const getCellClass = (guess, index, isFinal) => {
     if (!guess || guess[index] === undefined) {
       return 'cell'; // Default classname
+    }
+
+    if (isError) {
+      return 'cell error';
     }
 
     // Only apply colors if the guess is finalized

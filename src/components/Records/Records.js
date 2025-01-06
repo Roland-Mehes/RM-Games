@@ -1,4 +1,4 @@
-import { Ctx } from '../../context/store';
+import { Ctx } from '../../context/LanguageContext';
 import './records.css';
 
 const Records = () => {

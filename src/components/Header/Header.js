@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Ctx } from '../../context/store';
+import { Ctx } from '../../context/LanguageContext';
 import './header.css';
 
 const Header = () => {
@@ -11,10 +11,9 @@ const Header = () => {
     userName,
     setIsLoggedIn,
     languages,
-    languageData,
   } = Ctx();
 
-  const { records, gameButton, LogoutButton } = languageData;
+  const { lang } = languages[selectedLanguage];
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -24,6 +23,7 @@ const Header = () => {
 
   const logout = () => {
     setIsLoggedIn(false);
+    toggleMenu();
   };
 
   const toggleMenu = () => {
@@ -46,16 +46,18 @@ const Header = () => {
             Home
           </Link>
           <Link to="/play" onClick={toggleMenu}>
-            {gameButton}
+            {lang.gameButton}
           </Link>
           <Link to="/records" onClick={toggleMenu}>
-            {records}
+            {lang.records}
           </Link>
           {isLoggedIn ? (
             <>
-              <span className="user-name">{`Welcome, ${userName}`}</span>
+              {!isMenuOpen && (
+                <span className="user-name">{`Welcome, ${userName}`}</span>
+              )}
               <p className="logout" onClick={logout}>
-                {LogoutButton}
+                {lang.LogoutButton}
               </p>
             </>
           ) : (

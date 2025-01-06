@@ -1,7 +1,16 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { enData } from '../components/Games/Wordle/words-JSON/en';
-import { huData } from '../components/Games/Wordle/words-JSON/hu';
-import { roData } from '../components/Games/Wordle/words-JSON/ro';
+import {
+  wordleLang as enData,
+  webLang as enLang,
+} from '../components/Games/Wordle/words-JSON/en';
+import {
+  wordleLang as huData,
+  webLang as huLang,
+} from '../components/Games/Wordle/words-JSON/hu';
+import {
+  wordleLang as roData,
+  webLang as roLang,
+} from '../components/Games/Wordle/words-JSON/ro';
 
 const LanguageContext = createContext();
 
@@ -30,9 +39,9 @@ export const LanguageProvider = ({ children }) => {
   });
 
   const languages = {
-    English: enData,
-    Hungarian: huData,
-    Romanian: roData,
+    English: { data: enData, lang: enLang },
+    Hungarian: { data: huData, lang: huLang },
+    Romanian: { data: roData, lang: roLang },
   };
 
   useEffect(() => {
@@ -40,13 +49,13 @@ export const LanguageProvider = ({ children }) => {
     if (data) {
       // setSelectedWords(languageData.words);
       // setHowToPlay(languageData.howToPlay);
-      // setGameButton(languageData.gameButton);
+      // setGameButton(languageData.gameBut ton);
       // setLogoutButton(languageData.LogoutButton);
       // setRecords(languageData.records);
       // setWins(languageData.wins);
       // setLosses(languageData.losses);
       setLanguageData({
-        selectedWords: data.words,
+        selectedWords: data.data.words,
         howToPlay: data.howToPlay,
         gameButton: data.gameButton,
         logoutButton: data.LogoutButton,
@@ -56,6 +65,7 @@ export const LanguageProvider = ({ children }) => {
       });
     }
     localStorage.setItem('language', selectedLanguage);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedLanguage]);
 
   const exportValues = {

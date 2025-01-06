@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { LanguageProvider } from './context/store';
+import { LanguageProvider } from './context/LanguageContext.js';
 import Header from './components/Header/Header';
 import SignUp from './components/SignUp/SignUp.js';
 import LogIn from './components/LogIn/LogIn';

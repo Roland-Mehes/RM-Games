@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Ctx } from '../../context/store';
+import { Ctx } from '../../context/LanguageContext';
 import './login.css';
 
 const LogIn = () => {

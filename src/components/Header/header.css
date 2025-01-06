@@ -35,6 +35,10 @@
   transition: color 0.3s ease;
 }
 
+.logout {
+  cursor: pointer;
+}
+
 .nav-links a:hover {
   color: #4caf50;
 }

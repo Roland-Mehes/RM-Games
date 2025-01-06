@@ -50,7 +50,7 @@ const GamesSection = () => {
           imgSrc={'./img/memory-game2.png'}
           imgWidth="70px"
           imgHeight="70px"
-          description="Találd meg a párokat a legkevesebb lépésben!"
+          // description=""
           link="/memory"
         />
       </div>

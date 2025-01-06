@@ -1,18 +1,23 @@
 import { useState, useEffect } from 'react';
-import { Ctx } from '../../../context/store';
+import { Ctx } from '../../../context/LanguageContext'; // Importing the context
 import Line from './Line';
 import './game.css';
 
 const Wordle = () => {
-  const [solution, setSolution] = useState('wordl'); // The secret word
-  console.log(solution);
-
-  const [guesses, setGuesses] = useState(Array(6).fill(null)); // [null, null, null, null, null, null]
-  const [currentGuess, setCurrentGuess] = useState(''); // Currently typed in guess, not sent yet
-  const [isGameOver, setIsGameOver] = useState(false);
-  const { selectedLanguage, languageData } = Ctx(); // List of words from the selected language (Context API)
-  const { selectedWords } = languageData;
+  const [solution, setSolution] = useState(''); // The secret word
+  const [guesses, setGuesses] = useState(Array(6).fill(null)); // Store the guesses
+  const [currentGuess, setCurrentGuess] = useState(''); // The currently typed guess
+  const [isGameOver, setIsGameOver] = useState(false); // If the game is over
   const [msg, setMsg] = useState('Try to guess the word');
+  const [isError, setIsError] = useState(Array(6).fill(false)); // Track errors for each line
+  const [testMode, setTestMode] = useState(true); // Enable or disable test mode
+  console.log(solution);
+  const { selectedLanguage, languageData } = Ctx(); // Get language and words from context
+  const { selectedWords } = languageData; // The word list
+
+  const testModeHandler = () => {
+    setTestMode(!testMode);
+  };
 
   // Random word picker
   const randomWord = () => {
@@ -20,7 +25,10 @@ const Wordle = () => {
   };
 
   useEffect(() => {
-    setSolution(randomWord());
+    if (selectedWords && selectedWords.length > 0) {
+      setSolution(randomWord());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedWords]);
 
   // Handle input and key events
@@ -31,6 +39,22 @@ const Wordle = () => {
       }
 
       if (event.key === 'Enter' && currentGuess.length === 5) {
+        if (testMode) {
+          if (!selectedWords.includes(currentGuess)) {
+            setMsg('This word is not in our List of Words');
+            const currentIndex = guesses.findIndex((val) => val == null);
+            if (currentIndex !== -1) {
+              // Set error for the incorrect row
+              const newErrorState = [...isError];
+              newErrorState[currentIndex] = true;
+              setIsError(newErrorState);
+            }
+            return;
+          }
+        } else {
+          setIsError(Array(6).fill(false)); // Reset error when in test mode
+        }
+
         const newGuesses = [...guesses];
         const currentIndex = guesses.findIndex((val) => val == null);
 
@@ -48,12 +72,18 @@ const Wordle = () => {
           solution !== currentGuess
         ) {
           setIsGameOver(true);
-          setMsg('Game over. Restart for a new word.');
+          setMsg(
+            `Game over. The word was ${solution}. Restart for a new word.`
+          );
         }
       }
 
       if (event.key === 'Backspace') {
         setCurrentGuess(currentGuess.slice(0, -1));
+        setIsError(Array(6).fill(false)); // Reset error state when backspacing
+        if (currentGuess.length === 1 && !testMode) {
+          setMsg('Try to guess the word');
+        }
       }
 
       if (currentGuess.length < 5 && /^[a-z]{1}$/i.test(event.key)) {
@@ -64,7 +94,15 @@ const Wordle = () => {
     window.addEventListener('keydown', handleType);
 
     return () => window.removeEventListener('keydown', handleType);
-  }, [currentGuess, isGameOver, solution, guesses]);
+  }, [
+    currentGuess,
+    isGameOver,
+    solution,
+    guesses,
+    selectedWords,
+    testMode,
+    isError,
+  ]);
 
   const gameRestart = () => {
     setSolution(randomWord());
@@ -73,11 +111,14 @@ const Wordle = () => {
     setCurrentGuess('');
     setMsg('Try to guess the word');
     document.activeElement.blur(); // Removes focus from input
+    setIsError(Array(6).fill(false)); // Reset the error state on restart
   };
 
   useEffect(() => {
     gameRestart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedLanguage]);
+
   return (
     <div className="board">
       <div style={{ textAlign: 'center' }}>
@@ -96,9 +137,14 @@ const Wordle = () => {
               guess={isCurrentGuess ? currentGuess : guess ?? ''}
               isFinal={!isCurrentGuess && guess !== null}
               solution={solution}
+              isError={isError[i]} // Pass the error state for each row
             />
           );
         })}
+      </div>
+      <div>
+        <input type="checkbox" onChange={testModeHandler} />
+        Test Mode
       </div>
       <div className="new-game-button-container">
         <button className="new-game-button" onClick={gameRestart}>
