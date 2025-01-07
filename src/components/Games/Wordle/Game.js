@@ -11,17 +11,19 @@ const Wordle = () => {
   const [msg, setMsg] = useState('Try to guess the word');
   const [isError, setIsError] = useState(Array(6).fill(false)); // Track errors for each line
   const [testMode, setTestMode] = useState(true); // Enable or disable test mode
-  console.log(solution);
+
   const { selectedLanguage, languageData } = Ctx(); // Get language and words from context
   const { selectedWords } = languageData; // The word list
 
   const testModeHandler = () => {
     setTestMode(!testMode);
   };
-
+  console.log(solution);
   // Random word picker
   const randomWord = () => {
-    return selectedWords[Math.floor(Math.random() * selectedWords.length)];
+    if (selectedWords && selectedWords.length > 0) {
+      return selectedWords[Math.floor(Math.random() * selectedWords.length)];
+    }
   };
 
   useEffect(() => {
@@ -80,8 +82,9 @@ const Wordle = () => {
 
       if (event.key === 'Backspace') {
         setCurrentGuess(currentGuess.slice(0, -1));
-        setIsError(Array(6).fill(false)); // Reset error state when backspacing
-        if (currentGuess.length === 1 && !testMode) {
+        setIsError(Array(6).fill(false));
+        // Reset error state when backspacing
+        if (currentGuess.length === 5 && testMode) {
           setMsg('Try to guess the word');
         }
       }

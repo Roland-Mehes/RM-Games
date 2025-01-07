@@ -3,7 +3,7 @@ import './game.css';
 
 const Line = ({ guess, isFinal, solution, isError }) => {
   const getCellClass = (guess, index, isFinal) => {
-    if (!guess || guess[index] === undefined) {
+    if (!guess || guess[index] === null) {
       return 'cell'; // Default classname
     }
 
@@ -11,16 +11,33 @@ const Line = ({ guess, isFinal, solution, isError }) => {
       return 'cell error';
     }
 
-    // Only apply colors if the guess is finalized
     if (!isFinal) {
-      return 'cell';
+      return 'cell'; // No colors unless the guess is finalized
     }
 
     const char = guess[index];
-    if (solution[index] === char) {
-      return 'cell correct'; // Correct character and position
-    } else if (solution.includes(char)) {
-      return 'cell present'; // Correct character but wrong position
+    const solutionCharCounts = {};
+
+    // Count characters in the solution
+    for (let ch of solution) {
+      solutionCharCounts[ch] = (solutionCharCounts[ch] || 0) + 1;
+    }
+
+    // First pass: Mark correct positions (green)
+    const exactMatches = Array(5).fill(false);
+    for (let i = 0; i < 5; i++) {
+      if (guess[i] === solution[i]) {
+        exactMatches[i] = true;
+        solutionCharCounts[guess[i]]--;
+      }
+    }
+
+    // Second pass: Mark misplaced characters (yellow)
+    if (exactMatches[index]) {
+      return 'cell correct'; // Correct position
+    } else if (solution.includes(char) && solutionCharCounts[char] > 0) {
+      solutionCharCounts[char]--; // Decrement the count for misplaced matches
+      return 'cell present'; // Correct character, wrong position
     } else {
       return 'cell absent'; // Character not in the solution
     }
