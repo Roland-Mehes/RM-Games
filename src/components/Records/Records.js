@@ -2,8 +2,7 @@ import { Ctx } from '../../context/LanguageContext';
 import './records.css';
 
 const Records = () => {
-  const { userName, languageData } = Ctx();
-  const { records, wins, losses } = languageData;
+  const { userName } = Ctx();
 
   const users = JSON.parse(localStorage.getItem('users')) || [];
   const currentUser = users.find(
