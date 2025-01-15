@@ -164,9 +164,14 @@ const Wordle = () => {
           );
         })}
       </div>
-      <div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
         <input type="checkbox" onChange={() => setTestMode(!testMode)} />
-        Test Mode
+        Test Mode(ignore our wordlist)
       </div>
       <div className="new-game-button-container">
         <button className="new-game-button" onClick={gameRestart}>
