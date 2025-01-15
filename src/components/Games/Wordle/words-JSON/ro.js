@@ -2,7 +2,7 @@ import { wordsList } from './roWordsList';
 
 export const webLang = {
   // text for header
-  gameButton: 'Joc',
+  gameButton: 'Jocuri',
   LogoutButton: 'Deconectare',
   records: 'Recorduri',
 

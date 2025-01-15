@@ -9,7 +9,12 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newUser = { username, email, password, wins: 0, losses: 0 };
+    const newUser = {
+      username,
+      email,
+      password,
+      Games: {} /*, wins: 0, losses: 0*/,
+    };
     const users = JSON.parse(localStorage.getItem('users')) || [];
     users.push(newUser);
 

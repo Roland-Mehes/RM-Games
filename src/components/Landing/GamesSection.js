@@ -1,7 +1,7 @@
-import React from 'react';
-import GameCard from './GameCard';
 import './GamesSection.css';
+import React from 'react';
 import { Ctx } from '../../context/LanguageContext';
+import { Link } from 'react-router-dom';
 
 const GamesSection = () => {
   const { languageData } = Ctx();
@@ -12,7 +12,6 @@ const GamesSection = () => {
       <h2>{gameSectionHeader}</h2>
       <div className="games-list">
         <GameCard
-          title="Wordle"
           imgSrc="./img/wordle.png"
           imgWidth="auto"
           imgHeight="2rem"
@@ -37,8 +36,48 @@ const GamesSection = () => {
           link="/memory"
           BtnDisabled={true}
         />
+        <GameCard
+          title="Hangman"
+          imgSrc={'./img/hangman.png'}
+          imgWidth="70px"
+          imgHeight="70px"
+          // description=""
+          link="/memory"
+          BtnDisabled={true}
+        />
       </div>
     </section>
+  );
+};
+
+const GameCard = ({
+  title,
+  description,
+  link,
+  imgSrc,
+  imgWidth,
+  imgHeight,
+  BtnDisabled,
+}) => {
+  const { languageData } = Ctx();
+  const { playBtn } = languageData;
+
+  return (
+    <div className="game-card">
+      <h3>{title}</h3>
+      <img
+        src={imgSrc}
+        alt="img"
+        style={{ width: imgWidth, height: imgHeight, margin: 'auto' }}
+      ></img>
+      {/* <p>{description}</p> */}
+      <Link
+        to={BtnDisabled ? '#' : link}
+        className={BtnDisabled ? 'play-button disabled' : 'play-button'}
+      >
+        {playBtn}
+      </Link>
+    </div>
   );
 };
 

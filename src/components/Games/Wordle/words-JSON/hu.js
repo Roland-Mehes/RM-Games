@@ -2,7 +2,7 @@ import { wordsList } from './huWordsList';
 
 export const webLang = {
   // text for header
-  gameButton: 'Játék',
+  gameButton: 'Játékok',
   LogoutButton: 'Kijelentkezés',
   records: 'Rekordok',
 

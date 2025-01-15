@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Ctx } from '../../../context/LanguageContext';
-import Line from './Line';
 import './game.css';
 
 const Wordle = () => {
@@ -12,12 +11,9 @@ const Wordle = () => {
   const [isError, setIsError] = useState(Array(6).fill(false)); // Track errors for each line
   const [testMode, setTestMode] = useState(true); // Enable or disable test mode
 
-  const { selectedLanguage, languageData } = Ctx(); // Get language and words from context
+  const { selectedLanguage, languageData, userName } = Ctx(); // Get language and words from context
   const { selectedWords } = languageData; // The word list
 
-  const testModeHandler = () => {
-    setTestMode(!testMode);
-  };
   console.log(solution);
   // Random word picker
   const randomWord = () => {
@@ -69,6 +65,16 @@ const Wordle = () => {
         if (solution === currentGuess) {
           setIsGameOver(true);
           setMsg('You win! Good job! Restart and try another word.');
+          // increase Win for Wordle
+          const users = JSON.parse(localStorage.getItem('users'));
+
+          if (users) {
+            const user = users.find((val) => {
+              return val.username === userName.toLowerCase();
+            });
+            user.wins++;
+            localStorage.setItem('users', JSON.stringify(users)); // save the complete obj back to the localStorage
+          }
         } else if (
           currentIndex === guesses.length - 1 &&
           solution !== currentGuess
@@ -77,6 +83,15 @@ const Wordle = () => {
           setMsg(
             `Game over. The word was ${solution}. Restart for a new word.`
           );
+          const users = JSON.parse(localStorage.getItem('users'));
+
+          if (users) {
+            const user = users.find((val) => {
+              return val.username === userName.toLowerCase();
+            });
+            user.losses++;
+            localStorage.setItem('users', JSON.stringify(users)); // save the complete obj back to the localStorage
+          }
         }
       }
 
@@ -108,6 +123,7 @@ const Wordle = () => {
     selectedWords,
     testMode,
     isError,
+    userName,
   ]);
 
   const gameRestart = () => {
@@ -149,7 +165,7 @@ const Wordle = () => {
         })}
       </div>
       <div>
-        <input type="checkbox" onChange={testModeHandler} />
+        <input type="checkbox" onChange={() => setTestMode(!testMode)} />
         Test Mode
       </div>
       <div className="new-game-button-container">
@@ -157,6 +173,63 @@ const Wordle = () => {
           Restart
         </button>
       </div>
+    </div>
+  );
+};
+
+const Line = ({ guess, isFinal, solution, isError }) => {
+  const getCellClass = (guess, index, isFinal) => {
+    if (!guess || guess[index] === null) {
+      return 'cell'; // Default classname
+    }
+
+    if (isError) {
+      return 'cell error';
+    }
+
+    if (!isFinal) {
+      return 'cell'; // No colors unless the guess is finalized
+    }
+
+    const char = guess[index];
+    const solutionCharCounts = {};
+
+    // Count characters in the solution
+    for (let ch of solution) {
+      solutionCharCounts[ch] = (solutionCharCounts[ch] || 0) + 1;
+    }
+
+    // First pass: Mark correct positions (green)
+    const exactMatches = Array(5).fill(false);
+    for (let i = 0; i < 5; i++) {
+      if (guess[i] === solution[i]) {
+        exactMatches[i] = true;
+        solutionCharCounts[guess[i]]--;
+      }
+    }
+
+    // Second pass: Mark misplaced characters (yellow)
+    if (exactMatches[index]) {
+      return 'cell correct'; // Correct position
+    } else if (solution.includes(char) && solutionCharCounts[char] > 0) {
+      solutionCharCounts[char]--; // Decrement the count for misplaced matches
+      return 'cell present'; // Correct character, wrong position
+    } else {
+      return 'cell absent'; // Character not in the solution
+    }
+  };
+
+  return (
+    <div className={`line ${isFinal ? 'final' : ''}`}>
+      {Array(5) // Creating 5 cells (div)
+        .fill('')
+        .map((_, index) => {
+          return (
+            <div key={index} className={getCellClass(guess, index, isFinal)}>
+              {guess ? guess[index] : ''}
+            </div>
+          );
+        })}
     </div>
   );
 };

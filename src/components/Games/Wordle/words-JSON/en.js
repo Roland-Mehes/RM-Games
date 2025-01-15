@@ -2,7 +2,7 @@ import { wordsList } from './enWordsList';
 
 export const webLang = {
   // text for header
-  gameButton: 'Game',
+  gameButton: 'Games',
   LogoutButton: 'Logout',
   records: 'Records',
 
