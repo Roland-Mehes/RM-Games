@@ -10,18 +10,7 @@ const Records = () => {
   );
 
   return (
-    <div
-      className="records-container"
-      style={{
-        display: 'flex',
-        alignContent: 'center',
-        margin: '0 auto',
-        width: '500px',
-        flexDirection: 'column',
-        marginTop: '2rem',
-        justifyContent: 'center ',
-      }}
-    >
+    <div className="records-container">
       {userName ? (
         <div>
           <select>
@@ -45,38 +34,32 @@ const Records = () => {
       ) : (
         // Render the whole Record list with all the Users
 
-        <>
-          <table style={{ borderCollapse: 'collapse' }}>
-            <caption>
-              [CurrentGame]
-              <select>
-                <option> Games</option>
-              </select>
-            </caption>
-            <thead>
-              <tr>
-                <th>UserName</th>
-                <th>Wins</th>
-                <th>Losses</th>
+        <table style={{ borderCollapse: 'collapse' }}>
+          <caption>
+            [CurrentGame]
+            <select>
+              <option> Games</option>
+            </select>
+          </caption>
+          <thead>
+            <tr>
+              <th>UserName</th>
+              <th>Wins</th>
+              <th>Losses</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user, idx) => (
+              <tr key={user.username + idx}>
+                <td>{user.username}</td>
+                <td>{user.wins}</td>
+                <td>{user.losses}</td>
               </tr>
-            </thead>
-            <tbody>
-              {users.map((user, idx) => (
-                <tr key={user.username + idx}>
-                  <td>{user.username}</td>
-                  <td>{user.wins}</td>
-                  <td>{user.losses}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </>
+            ))}
+          </tbody>
+        </table>
       )}
     </div>
-
-    // {users.map((user, idx) => (
-    //         <td key={user.username + idx}>{user.username}</td>
-    //       ))}
   );
 };
 

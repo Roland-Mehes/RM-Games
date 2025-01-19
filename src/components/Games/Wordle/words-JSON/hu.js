@@ -25,9 +25,9 @@ export const webLang = {
 };
 
 export const huKeyboard = [
-  ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
-  ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-  ['z', 'x', 'c', 'v', 'b', 'n', 'm'],
+  ['q', 'w', 'e', 'r', 't', 'z', 'u', 'i', 'o', 'p', 'ö', 'ü', 'ó'],
+  ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'é', 'á', 'ű'],
+  ['í', 'y', 'x', 'c', 'v', 'b', 'n', 'm', 'ö', 'ő'],
   ['enter', 'backspace'],
 ];
 

@@ -1,25 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Ctx } from '../../context/LanguageContext';
 import './Keyboard.css';
 
-const Keyboard = (props) => {
+const Keyboard = () => {
   const { languageData } = Ctx();
-  const keyboard = languageData.keyboard || [];
+  const [keyboard, setKeyboard] = useState(languageData.keyboard || []);
+
+  // Frissítsük a billentyűzetet, ha a nyelv változik
+  useEffect(() => {
+    setKeyboard(languageData.keyboard || []);
+    console.log('a nyelv :' + languageData.keyboard);
+  }, [languageData]);
 
   const handleKeyPress = (key) => {
-    // Alapvetően a key értékével meghívod a megfelelő eseményeket
     let event;
 
     if (key === 'enter') {
-      event = { key: 'Enter' }; // Az Enter gombot így kezeled
+      event = { key: 'Enter' };
     } else if (key === 'backspace') {
-      event = { key: 'Backspace' }; // A Backspace gombot így kezeled
+      event = { key: 'Backspace' };
     } else {
-      event = { key }; // Egyéb karakterek
+      event = { key };
     }
 
-    // Az event.key értéke ugyanaz, mint a billentyű lenyomása az inputnál
-    window.dispatchEvent(new KeyboardEvent('keydown', event)); // Ezzel váltod ki a keydown eseményt
+    window.dispatchEvent(new KeyboardEvent('keydown', event));
   };
 
   return (

@@ -8,7 +8,6 @@ const Header = () => {
     selectedLanguage,
     setSelectedLanguage,
     isLoggedIn,
-    userName,
     setIsLoggedIn,
     languages,
   } = Ctx();
@@ -45,7 +44,7 @@ const Header = () => {
           <Link to="/" onClick={toggleMenu}>
             Home
           </Link>
-          <Link to="/play" onClick={toggleMenu}>
+          <Link to="/games" onClick={toggleMenu}>
             {lang.gameButton}
           </Link>
           <Link to="/records" onClick={toggleMenu}>
@@ -53,9 +52,6 @@ const Header = () => {
           </Link>
           {isLoggedIn ? (
             <>
-              {!isMenuOpen && (
-                <span className="user-name">{`Welcome, ${userName}`}</span>
-              )}
               <p className="logout" onClick={logout}>
                 {lang.LogoutButton}
               </p>
