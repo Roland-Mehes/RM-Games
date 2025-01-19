@@ -9,3 +9,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background: linear-gradient(135deg, #6a1b9a, #4a00e0);
 }
+
+.records-container td {
+  border: 1px solid rgb(140, 90, 249);
+}

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Ctx } from '../../../context/LanguageContext';
 import './game.css';
+import { HiOutlineRefresh } from 'react-icons/hi';
+import Keyboard from '../../Keyboard/keyboard';
 
 const Wordle = () => {
   const [solution, setSolution] = useState(''); // The secret word
@@ -65,15 +67,22 @@ const Wordle = () => {
         if (solution === currentGuess) {
           setIsGameOver(true);
           setMsg('You win! Good job! Restart and try another word.');
-          // increase Win for Wordle
-          const users = JSON.parse(localStorage.getItem('users'));
 
-          if (users) {
-            const user = users.find((val) => {
-              return val.username === userName.toLowerCase();
-            });
-            user.wins++;
-            localStorage.setItem('users', JSON.stringify(users)); // save the complete obj back to the localStorage
+          // WORK with localStorage when user is logged in
+          if (userName) {
+            const users = JSON.parse(localStorage.getItem('users')) || []; // Fallback to empty array if not found
+
+            if (users) {
+              const user = users.find(
+                (val) => val.username === userName.toLowerCase()
+              );
+
+              if (user) {
+                user.wins = (user.wins || 0) + 1;
+              }
+
+              localStorage.setItem('users', JSON.stringify(users)); // Save the complete obj back to localStorage
+            }
           }
         } else if (
           currentIndex === guesses.length - 1 &&
@@ -83,14 +92,22 @@ const Wordle = () => {
           setMsg(
             `Game over. The word was ${solution}. Restart for a new word.`
           );
-          const users = JSON.parse(localStorage.getItem('users'));
 
-          if (users) {
-            const user = users.find((val) => {
-              return val.username === userName.toLowerCase();
-            });
-            user.losses++;
-            localStorage.setItem('users', JSON.stringify(users)); // save the complete obj back to the localStorage
+          // Work with localStorage if there is user logged in
+          if (userName) {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+
+            if (users) {
+              const user = users.find(
+                (val) => val.username === userName.toLowerCase()
+              );
+
+              if (user) {
+                user.losses = (user.losses || 0) + 1;
+              }
+
+              localStorage.setItem('users', JSON.stringify(users)); // Save the complete obj back to localStorage
+            }
           }
         }
       }
@@ -142,45 +159,55 @@ const Wordle = () => {
   }, [selectedLanguage]);
 
   return (
-    <div className="board">
-      <div style={{ textAlign: 'center' }}>
-        <h3>
-          {selectedLanguage}
-          <br />
-          {msg}
-        </h3>
-      </div>
-      <div className="">
-        {guesses.map((guess, i) => {
-          const isCurrentGuess = i === guesses.findIndex((val) => val == null);
-          return (
-            <Line
-              key={i}
-              guess={isCurrentGuess ? currentGuess : guess ?? ''}
-              isFinal={!isCurrentGuess && guess !== null}
-              solution={solution}
-              isError={isError[i]} // Pass the error state for each row
-            />
-          );
-        })}
+    <>
+      <div className="board">
+        <div className="wordle-refresh-btn">
+          <HiOutlineRefresh size="40" onClick={gameRestart} />
+        </div>
+        <div style={{ textAlign: 'center', height: '70px' }}>
+          <h3>
+            {selectedLanguage}
+            <br />
+            {msg}
+          </h3>
+        </div>
+        <div className="">
+          {guesses.map((guess, i) => {
+            const isCurrentGuess =
+              i === guesses.findIndex((val) => val == null);
+            return (
+              <Line
+                key={i}
+                guess={isCurrentGuess ? currentGuess : guess ?? ''}
+                isFinal={!isCurrentGuess && guess !== null}
+                solution={solution}
+                isError={isError[i]} // Pass the error state for each row
+              />
+            );
+          })}
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <input type="checkbox" onChange={() => setTestMode(!testMode)} />
+          Test Mode(ignore our wordlist)
+        </div>
       </div>
       <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-        }}
+        style={{ display: 'flex', justifyContent: 'center', margin: '0 auto' }}
       >
-        <input type="checkbox" onChange={() => setTestMode(!testMode)} />
-        Test Mode(ignore our wordlist)
+        <div className="keyboard">
+          <Keyboard />
+        </div>
       </div>
-      <div className="new-game-button-container">
-        <button className="new-game-button" onClick={gameRestart}>
-          Restart
-        </button>
-      </div>
-    </div>
+    </>
   );
 };
+
+// LINE COMPONENT
 
 const Line = ({ guess, isFinal, solution, isError }) => {
   const getCellClass = (guess, index, isFinal) => {

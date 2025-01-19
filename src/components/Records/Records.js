@@ -10,20 +10,20 @@ const Records = () => {
   );
 
   return (
-    <div>
+    <div
+      className="records-container"
+      style={{
+        display: 'flex',
+        alignContent: 'center',
+        margin: '0 auto',
+        width: '500px',
+        flexDirection: 'column',
+        marginTop: '2rem',
+        justifyContent: 'center ',
+      }}
+    >
       {userName ? (
-        <div
-          className="records-container"
-          style={{
-            display: 'flex',
-            alignContent: 'center',
-            margin: '0 auto',
-            width: '500px',
-            flexDirection: 'column',
-            marginTop: '2rem',
-            justifyContent: 'center ',
-          }}
-        >
+        <div>
           <select>
             <option>Val1</option>
             <option>Val1</option>
@@ -41,37 +41,42 @@ const Records = () => {
               </p>
             </div>
           </div>
-          {/* <select>
-            <option>opt1</option>
-            <option>opt2</option>
-          </select>
-          <h1>
-            {' '}
-            {records} for {userName}
-          </h1>
-          <table class="table">
+        </div>
+      ) : (
+        // Render the whole Record list with all the Users
+
+        <>
+          <table style={{ borderCollapse: 'collapse' }}>
+            <caption>
+              [CurrentGame]
+              <select>
+                <option> Games</option>
+              </select>
+            </caption>
             <thead>
               <tr>
+                <th>UserName</th>
                 <th>Wins</th>
                 <th>Losses</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>{currentUser.wins}</td>
-                <td>{currentUser.losses}</td>
-                <td></td>
-              </tr>
+              {users.map((user, idx) => (
+                <tr key={user.username + idx}>
+                  <td>{user.username}</td>
+                  <td>{user.wins}</td>
+                  <td>{user.losses}</td>
+                </tr>
+              ))}
             </tbody>
-          </table> */}
-        </div>
-      ) : (
-        // Render the whole Record list with all the Users
-        users.map((user, idx) => (
-          <p key={user.username + idx}>{user.username}</p>
-        ))
+          </table>
+        </>
       )}
     </div>
+
+    // {users.map((user, idx) => (
+    //         <td key={user.username + idx}>{user.username}</td>
+    //       ))}
   );
 };
 

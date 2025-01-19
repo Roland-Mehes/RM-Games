@@ -2,14 +2,17 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import {
   wordleLang as enData,
   webLang as enLang,
+  enKeyboard,
 } from '../components/Games/Wordle/words-JSON/en';
 import {
   wordleLang as huData,
   webLang as huLang,
+  huKeyboard,
 } from '../components/Games/Wordle/words-JSON/hu';
 import {
   wordleLang as roData,
   webLang as roLang,
+  roKeyboard,
 } from '../components/Games/Wordle/words-JSON/ro';
 
 const LanguageContext = createContext();
@@ -23,9 +26,9 @@ export const LanguageProvider = ({ children }) => {
   const [languageData, setLanguageData] = useState({});
 
   const languages = {
-    English: { data: enData, lang: enLang },
-    Hungarian: { data: huData, lang: huLang },
-    Romanian: { data: roData, lang: roLang },
+    English: { data: enData, lang: enLang, keyboard: enKeyboard },
+    Hungarian: { data: huData, lang: huLang, keyboard: huKeyboard },
+    Romanian: { data: roData, lang: roLang, keyboard: roKeyboard },
   };
 
   useEffect(() => {
@@ -49,6 +52,7 @@ export const LanguageProvider = ({ children }) => {
         // Landing Page Benefits
         benefitsHeader: langData.lang.benefitsHeader,
         benefitsContent: langData.lang.benefitsContent,
+        keyboard: langData.keyboard,
       });
     }
     localStorage.setItem('language', selectedLanguage);

@@ -24,6 +24,13 @@ export const webLang = {
   ],
 };
 
+export const huKeyboard = [
+  ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
+  ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
+  ['z', 'x', 'c', 'v', 'b', 'n', 'm'],
+  ['enter', 'backspace'],
+];
+
 export const wordleLang = {
   //text and words only for wordle game
   words: wordsList,
