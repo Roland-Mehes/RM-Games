@@ -1,6 +1,6 @@
 import './Hangman.css';
 import HangmanKeyboard from './HangmanKeyboard';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Ctx } from '../../../context/LanguageContext';
 import HangmanBodyDraw from './HangmanBodyDraw';
 import HangmanWord from './HangmanWord';
@@ -15,28 +15,36 @@ function Hangman() {
     (letter) => wordToGuess && !wordToGuess.includes(letter)
   );
 
+  const isLoser = inCorrectLetters.length >= 6;
+  const isWinner = wordToGuess
+    .split('')
+    .every((letter) => guessedLetters.includes(letter));
+
   // Random word picker
-  const randomWord = () => {
+  const randomWord = useCallback(() => {
     if (selectedWords && selectedWords.length > 0) {
       return selectedWords[Math.floor(Math.random() * selectedWords.length)];
     }
-  };
+    return '';
+  }, [selectedWords]);
+
+  console.log(wordToGuess);
 
   useEffect(() => {
     if (selectedWords && selectedWords.length > 0) {
       setWordToGuess(randomWord());
       setGuessedLetters([]);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedWords, selectedLanguage]);
+  }, [selectedWords, randomWord, selectedLanguage]);
 
-  console.log(randomWord());
+  const addGuessedLetter = useCallback(
+    (letter) => {
+      if (guessedLetters.includes(letter) || isLoser || isWinner) return;
 
-  const addGuessedLetter = (letter) => {
-    if (guessedLetters.includes(letter)) return;
-
-    setGuessedLetters((currentLetters) => [...currentLetters, letter]);
-  };
+      setGuessedLetters((currentLetters) => [...currentLetters, letter]);
+    },
+    [guessedLetters, isWinner, isLoser]
+  );
 
   useEffect(() => {
     const handler = (event) => {
@@ -58,16 +66,27 @@ function Hangman() {
   return (
     <>
       <div className="hangman-container">
-        <div className="hangman-header">Lose or Win</div>
+        <div className="hangman-header">
+          {isWinner && 'WINNER - Refresh to try again '}
+          {isLoser && 'Nice Try '}
+        </div>
         <HangmanBodyDraw numberOfGuesses={inCorrectLetters.length} />
         <HangmanWord
+          reveal={isLoser}
           guessedLetters={guessedLetters}
           wordToGuess={wordToGuess}
         />
 
         <div className="hangman-keyboard-container"></div>
       </div>
-      <HangmanKeyboard />
+      <HangmanKeyboard
+        disabled={isWinner || isLoser}
+        activeLetters={guessedLetters.filter((letter) =>
+          wordToGuess.includes(letter)
+        )}
+        inactiveLetters={inCorrectLetters}
+        addGuessedletter={addGuessedLetter}
+      />
     </>
   );
 }

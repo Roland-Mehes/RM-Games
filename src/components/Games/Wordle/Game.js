@@ -25,112 +25,105 @@ const Wordle = () => {
     }
   };
 
-  useEffect(() => {
-    if (selectedWords && selectedWords.length > 0) {
-      setSolution(randomWord());
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedWords]);
   console.log(solution);
 
-  // Handle input and key events
-  useEffect(() => {
-    const handleType = (event) => {
-      if (isGameOver) {
-        return;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleType = (event) => {
+    if (isGameOver) {
+      return;
+    }
+
+    if (event.key === 'Enter' && currentGuess.length === 5) {
+      if (testMode) {
+        if (!selectedWords.includes(currentGuess)) {
+          setMsg('This word is not in our List of Words');
+          const currentIndex = guesses.findIndex((val) => val == null);
+          if (currentIndex !== -1) {
+            // Set error for the incorrect row
+            const newErrorState = [...isError];
+            newErrorState[currentIndex] = true;
+            setIsError(newErrorState);
+          }
+          return;
+        }
+      } else {
+        setIsError(Array(6).fill(false)); // Reset error when in test mode
       }
 
-      if (event.key === 'Enter' && currentGuess.length === 5) {
-        if (testMode) {
-          if (!selectedWords.includes(currentGuess)) {
-            setMsg('This word is not in our List of Words');
-            const currentIndex = guesses.findIndex((val) => val == null);
-            if (currentIndex !== -1) {
-              // Set error for the incorrect row
-              const newErrorState = [...isError];
-              newErrorState[currentIndex] = true;
-              setIsError(newErrorState);
-            }
-            return;
-          }
-        } else {
-          setIsError(Array(6).fill(false)); // Reset error when in test mode
-        }
+      const newGuesses = [...guesses];
+      const currentIndex = guesses.findIndex((val) => val == null);
 
-        const newGuesses = [...guesses];
-        const currentIndex = guesses.findIndex((val) => val == null);
-
-        if (currentIndex !== -1) {
-          newGuesses[currentIndex] = currentGuess;
-          setGuesses(newGuesses);
-          setCurrentGuess('');
-        }
-
-        if (solution === currentGuess) {
-          setIsGameOver(true);
-          setMsg('You win! Good job! Restart and try another word.');
-
-          // WORK with localStorage when user is logged in
-          if (userName) {
-            const users = JSON.parse(localStorage.getItem('users')) || []; // Fallback to empty array if not found
-
-            if (users) {
-              const user = users.find(
-                (val) => val.username === userName.toLowerCase()
-              );
-
-              if (user) {
-                user.wins = (user.wins || 0) + 1;
-              }
-
-              localStorage.setItem('users', JSON.stringify(users)); // Save the complete obj back to localStorage
-            }
-          }
-        } else if (
-          currentIndex === guesses.length - 1 &&
-          solution !== currentGuess
-        ) {
-          setIsGameOver(true);
-          setMsg(
-            `Game over. The word was ${solution}. Restart for a new word.`
-          );
-
-          // Work with localStorage if there is user logged in
-          if (userName) {
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-
-            if (users) {
-              const user = users.find(
-                (val) => val.username === userName.toLowerCase()
-              );
-
-              if (user) {
-                user.losses = (user.losses || 0) + 1;
-              }
-
-              localStorage.setItem('users', JSON.stringify(users)); // Save the complete obj back to localStorage
-            }
-          }
-        }
+      if (currentIndex !== -1) {
+        newGuesses[currentIndex] = currentGuess;
+        setGuesses(newGuesses);
+        setCurrentGuess('');
       }
 
-      if (event.key === 'Backspace') {
-        setCurrentGuess(currentGuess.slice(0, -1));
-        setIsError(Array(6).fill(false));
-        // Reset error state when backspacing
-        if (currentGuess.length === 5 && testMode) {
-          setMsg('Try to guess the word');
-        }
-      }
+      if (solution === currentGuess) {
+        setIsGameOver(true);
+        setMsg('You win! Good job! Restart and try another word.');
 
-      if (
-        currentGuess.length < 5 &&
-        /^[a-záéíóöőúüűăâîșț]{1}$/i.test(event.key)
+        // WORK with localStorage when user is logged in
+        if (userName) {
+          const users = JSON.parse(localStorage.getItem('users')) || []; // Fallback to empty array if not found
+
+          if (users) {
+            const user = users.find(
+              (val) => val.username === userName.toLowerCase()
+            );
+
+            if (user) {
+              user.wins = (user.wins || 0) + 1;
+            }
+
+            localStorage.setItem('users', JSON.stringify(users)); // Save the complete obj back to localStorage
+          }
+        }
+      } else if (
+        currentIndex === guesses.length - 1 &&
+        solution !== currentGuess
       ) {
-        setCurrentGuess((oldGuess) => oldGuess + event.key.toLowerCase());
-      }
-    };
+        setIsGameOver(true);
+        setMsg(`Game over. The word was ${solution}. Restart for a new word.`);
 
+        // Work with localStorage if there is user logged in
+        if (userName) {
+          const users = JSON.parse(localStorage.getItem('users')) || [];
+
+          if (users) {
+            const user = users.find(
+              (val) => val.username === userName.toLowerCase()
+            );
+
+            if (user) {
+              user.losses = (user.losses || 0) + 1;
+            }
+
+            localStorage.setItem('users', JSON.stringify(users)); // Save the complete obj back to localStorage
+          }
+        }
+      }
+    }
+
+    if (event.key === 'Backspace') {
+      setCurrentGuess(currentGuess.slice(0, -1));
+      setIsError(Array(6).fill(false));
+      // Reset error state when backspacing
+      if (currentGuess.length === 5 && testMode) {
+        setMsg('Try to guess the word');
+      }
+    }
+
+    if (
+      currentGuess.length < 5 &&
+      /^[a-záéíóöőúüűăâîșț]{1}$/i.test(event.key)
+    ) {
+      setCurrentGuess((oldGuess) => oldGuess + event.key.toLowerCase());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  };
+
+  useEffect(() => {
     window.addEventListener('keydown', handleType);
 
     return () => window.removeEventListener('keydown', handleType);
@@ -143,6 +136,7 @@ const Wordle = () => {
     testMode,
     isError,
     userName,
+    handleType,
   ]);
 
   const gameRestart = () => {
@@ -202,7 +196,7 @@ const Wordle = () => {
         style={{ display: 'flex', justifyContent: 'center', margin: '0 auto' }}
       >
         <div className="keyboard">
-          <Keyboard />
+          <Keyboard keyPressed={handleType} /> {/* Pass handleType here */}
         </div>
       </div>
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Ctx } from '../../context/LanguageContext';
 import './Keyboard.css';
 
-const Keyboard = () => {
+const Keyboard = ({ keyPressed }) => {
   const { languageData } = Ctx();
   const [keyboard, setKeyboard] = useState(languageData.keyboard || []);
 
@@ -29,10 +29,11 @@ const Keyboard = () => {
     <div className="keyboard">
       {keyboard.map((row, rowIndex) => (
         <div key={rowIndex} className="keyboard-row">
-          {row.map((key) => (
+          {row.map((key, keyIdx) => (
             <button
               onClick={() => handleKeyPress(key)}
               className="keyboard-key"
+              key={keyIdx}
             >
               {key === 'enter' ? 'Enter' : key === 'backspace' ? '←' : key}
             </button>

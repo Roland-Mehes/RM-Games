@@ -20,3 +20,8 @@
 .hangman-body-draw {
   position: relative;
 }
+
+@media (max-width: 743px) {
+  .hangman-container {
+  }
+}

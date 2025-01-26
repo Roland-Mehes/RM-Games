@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Ctx } from '../../../context/LanguageContext';
-import './HangmanKeyboard.css';
+import styles from './HangmanKeyboard.module.css';
 
-const HangmanKeyboard = () => {
+const HangmanKeyboard = ({
+  activeLetters,
+  inactiveLetters,
+  addGuessedletter,
+  disabled = false,
+}) => {
   const { languageData } = Ctx();
   const [keyboard, setKeyboard] = useState(languageData.keyboard || []);
 
@@ -10,27 +15,32 @@ const HangmanKeyboard = () => {
     setKeyboard(languageData.keyboard || []);
   }, [languageData]);
 
-  const handleKeyPress = (val) => {
-    console.log(val);
-  };
+  const filteredKeyboard = keyboard.map((row) =>
+    row.filter(
+      (character) => character !== 'enter' && character !== 'backspace'
+    )
+  );
 
   return (
-    <div className="hangman-keyboard-container ">
-      {keyboard.map((row, rowidx) => (
-        <div key={row + rowidx} className="hangman-keyboard-rows">
-          {row.map((character, idx) => (
-            <button
-              onClick={() => handleKeyPress(character)}
-              className="hangman-btn"
-              key={character + idx}
-            >
-              {character === 'enter'
-                ? 'Enter'
-                : character === 'backspace'
-                ? '←'
-                : character}
-            </button>
-          ))}
+    <div className={`${styles.hangmanKeyboardContainer}`}>
+      {filteredKeyboard.map((row, rowidx) => (
+        <div key={row + rowidx} className="hangmanKeyboardRow">
+          {row.map((character, idx) => {
+            const isActive = activeLetters?.includes(character);
+            const isInactive = inactiveLetters?.includes(character);
+            return (
+              <button
+                onClick={() => addGuessedletter(character)}
+                className={`${styles.hangmanBtn} ${
+                  isActive ? styles.active : ''
+                }${isInactive ? styles.inactive : ''}`}
+                disabled={isInactive || isActive || disabled}
+                key={character + idx}
+              >
+                {character}
+              </button>
+            );
+          })}
         </div>
       ))}
     </div>

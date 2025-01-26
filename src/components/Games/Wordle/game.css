@@ -60,6 +60,12 @@
   color: white;
 }
 
+.cell.error {
+  background-color: red;
+  color: white;
+  animation: shake 0.5s ease-in-out;
+}
+
 .line.final .cell {
   font-weight: bold;
 }
@@ -77,12 +83,6 @@
     background-color: #388e3c;
     transform: scale(1);
   }
-}
-
-.cell.error {
-  background-color: red;
-  color: white;
-  animation: shake 0.5s ease-in-out;
 }
 
 /* Az animáció, hogy a cella remegjen */
