@@ -9,7 +9,6 @@ const Keyboard = () => {
   // Frissítsük a billentyűzetet, ha a nyelv változik
   useEffect(() => {
     setKeyboard(languageData.keyboard || []);
-    console.log('a nyelv :' + languageData.keyboard);
   }, [languageData]);
 
   const handleKeyPress = (key) => {
@@ -30,9 +29,8 @@ const Keyboard = () => {
     <div className="keyboard">
       {keyboard.map((row, rowIndex) => (
         <div key={rowIndex} className="keyboard-row">
-          {row.map((key, keyIndex) => (
+          {row.map((key) => (
             <button
-              key={keyIndex}
               onClick={() => handleKeyPress(key)}
               className="keyboard-key"
             >

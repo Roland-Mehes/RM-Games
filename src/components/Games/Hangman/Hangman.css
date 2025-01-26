@@ -1,0 +1,22 @@
+.hangman-container {
+  margin: 10px auto 0;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #6a1b9a, #4a00e0);
+  box-shadow: 1px 1px 8px 3px rgb(0 0 0);
+  max-width: 80vw;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 2rem auto;
+  align-items: center;
+}
+
+.hangman-header {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.hangman-body-draw {
+  position: relative;
+}

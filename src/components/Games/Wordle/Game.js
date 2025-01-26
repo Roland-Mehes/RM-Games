@@ -3,6 +3,7 @@ import { Ctx } from '../../../context/LanguageContext';
 import './game.css';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import Keyboard from '../../Keyboard/keyboard';
+import InstructionModal from './InstructionModal/InstructionModal';
 
 const Wordle = () => {
   const [solution, setSolution] = useState(''); // The secret word
@@ -12,11 +13,11 @@ const Wordle = () => {
   const [msg, setMsg] = useState('Try to guess the word');
   const [isError, setIsError] = useState(Array(6).fill(false)); // Track errors for each line
   const [testMode, setTestMode] = useState(true); // Enable or disable test mode
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   const { selectedLanguage, languageData, userName } = Ctx(); // Get language and words from context
   const { selectedWords } = languageData; // The word list
 
-  console.log(solution);
   // Random word picker
   const randomWord = () => {
     if (selectedWords && selectedWords.length > 0) {
@@ -30,6 +31,7 @@ const Wordle = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedWords]);
+  console.log(solution);
 
   // Handle input and key events
   useEffect(() => {
@@ -123,7 +125,7 @@ const Wordle = () => {
 
       if (
         currentGuess.length < 5 &&
-        /^[a-záéíóöőúüűăâîşţ]{1}$/i.test(event.key)
+        /^[a-záéíóöőúüűăâîșț]{1}$/i.test(event.key)
       ) {
         setCurrentGuess((oldGuess) => oldGuess + event.key.toLowerCase());
       }
@@ -203,6 +205,10 @@ const Wordle = () => {
           <Keyboard />
         </div>
       </div>
+
+      {isModalOpen && (
+        <InstructionModal onClose={() => setIsModalOpen(false)} />
+      )}
     </>
   );
 };

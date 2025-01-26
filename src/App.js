@@ -9,6 +9,7 @@ import Records from './components/Records/Records.js';
 import Home from './Pages/Home';
 import Footer from './components/footer/footer';
 import './index.css';
+import Hangman from './components/Games/Hangman/Hangman.js';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/records" element={<Records />} />
           <Route path="/Wordle" element={<Wordle />} />
           <Route path="/Sudoku" element={<Sudoku />} />
+          <Route path="/Hangman" element={<Hangman />} />
         </Routes>
         <Footer />
       </Router>

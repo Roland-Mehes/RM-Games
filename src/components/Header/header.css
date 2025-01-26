@@ -7,6 +7,7 @@
   color: #fff;
   position: relative;
   width: 100%;
+  z-index: 999;
 }
 
 .header-content {
@@ -98,5 +99,10 @@
 
   .nav-links.open {
     display: flex;
+  }
+
+  .language-selector {
+    max-width: 200px;
+    margin: auto;
   }
 }

@@ -42,8 +42,8 @@ const GamesSection = () => {
           imgWidth="70px"
           imgHeight="70px"
           // description=""
-          link="/memory"
-          BtnDisabled={true}
+          link="/Hangman"
+          BtnDisabled={false}
         />
       </div>
     </section>
