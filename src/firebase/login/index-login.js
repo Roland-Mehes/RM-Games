@@ -7,13 +7,7 @@ import { getAnalytics } from 'firebase/analytics';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: 'AIzaSyALEDF3NFqtbamaUuB3lZyOX_voxvrOTBw',
-  authDomain: 'rm-games-5dedb.firebaseapp.com',
-  projectId: 'rm-games-5dedb',
-  storageBucket: 'rm-games-5dedb.firebasestorage.app',
-  messagingSenderId: '250477589435',
-  appId: '1:250477589435:web:7644218e19c3fd52894a9e',
-  measurementId: 'G-CWKBEPZBPZ',
+  
 };
 
 // Initialize Firebase
