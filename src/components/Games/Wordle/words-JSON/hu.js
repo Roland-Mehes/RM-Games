@@ -22,12 +22,20 @@ export const webLang = {
     'Kihívások minden nap',
     'Kiváló a szórakozásra és az agytornáztatásra',
   ],
+
+  // text for Wordle Game
+  wordleGuessTheWord: 'Találd ki a szót',
+  wordleWordIsNotInDatabase: 'Ez a szó nincs a szavaink listájában.',
+  wordleGameOver: 'Játék vége. A helyes szó: ',
+
+  //Common game Text
+  gameOverText: 'Próbáld újra',
 };
 
 export const huKeyboard = [
   ['q', 'w', 'e', 'r', 't', 'z', 'u', 'i', 'o', 'p', 'ö', 'ü', 'ó'],
   ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'é', 'á', 'ű'],
-  ['í', 'y', 'x', 'c', 'v', 'b', 'n', 'm', 'ő'],
+  ['í', 'y', 'x', 'c', 'v', 'b', 'n', 'm', 'ő', 'ú'],
   ['enter', 'backspace'],
 ];
 

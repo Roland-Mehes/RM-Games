@@ -4,11 +4,6 @@ import './records.css';
 const Records = () => {
   const { userName } = Ctx();
 
-  const users = JSON.parse(localStorage.getItem('users')) || [];
-  const currentUser = users.find(
-    (user) => user.username.toLowerCase() === userName.toLowerCase()
-  );
-
   return (
     <div className="records-container">
       {userName ? (
@@ -21,12 +16,12 @@ const Records = () => {
           <div>
             <div className="container-win">
               <p>
-                Win : <span>{currentUser.wins}</span>
+                Win : <span></span>
               </p>
             </div>
             <div className="container-lose">
               <p>
-                Losses : <span>{currentUser.losses}</span>
+                Losses : <span></span>
               </p>
             </div>
           </div>
@@ -48,15 +43,7 @@ const Records = () => {
               <th>Losses</th>
             </tr>
           </thead>
-          <tbody>
-            {users.map((user, idx) => (
-              <tr key={user.username + idx}>
-                <td>{user.username}</td>
-                <td>{user.wins}</td>
-                <td>{user.losses}</td>
-              </tr>
-            ))}
-          </tbody>
+          <tbody></tbody>
         </table>
       )}
     </div>

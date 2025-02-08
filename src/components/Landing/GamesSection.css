@@ -1,14 +1,11 @@
 .games-section {
   padding: 40px 20px;
-  background: linear-gradient(
-    135deg,
-    rgba(74, 0, 224, 0.9),
-    rgb(23 15 30),
-    rgb(106 27 154)
-  );
+  background-color: rgba(155, 126, 163, 0.9);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
 }
 
 .games-section h2 {
@@ -16,7 +13,7 @@
   font-size: 2.5rem;
   color: white;
   margin-bottom: 30px;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0);
 }
 
 .games-list {
@@ -29,7 +26,8 @@
 }
 
 .game-card {
-  background: linear-gradient(135deg, #6a1b9a, #4a00e0);
+  background-color: rgba(135, 177, 183, 0.3);
+  backdrop-filter: blur(4px);
   max-width: 400px;
   min-height: 181.2px;
   color: white;
@@ -40,6 +38,7 @@
   flex-direction: column;
   align-items: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 3px groove rgb(56, 98, 134);
 }
 
 .game-card:hover {
@@ -50,6 +49,7 @@
 .game-card h3 {
   font-size: 1.4rem;
   margin-bottom: 10px;
+  color: #371c47;
 }
 
 .game-card p {
@@ -61,18 +61,17 @@
   margin-top: auto;
   padding: 10px 20px;
   font-size: 1rem;
-  background-color: #28a745;
-  color: #333;
-  border: none;
+  background-color: rgba(135, 177, 183, 0.8);
   border-radius: 5px;
   text-decoration: none;
   font-weight: bold;
   transition: background-color 0.3s ease, color 0.3s ease;
   margin-top: 10px;
+  color: black;
 }
 
 .play-button:hover {
-  background-color: #218838;
+  background-color: rgba(53, 75, 118, 0.96);
   color: #000;
 }
 
@@ -81,4 +80,7 @@
   color: #666;
   pointer-events: none;
   cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
 }

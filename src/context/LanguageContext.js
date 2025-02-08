@@ -22,7 +22,7 @@ export const LanguageProvider = ({ children }) => {
 
   const [selectedLanguage, setSelectedLanguage] = useState(lStore);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userName, setUserName] = useState('');
+  const [userName, setUserName] = useState(null);
   const [languageData, setLanguageData] = useState({});
 
   const languages = {

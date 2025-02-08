@@ -1,6 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Ctx } from '../../context/LanguageContext';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+import { auth } from '../../fbServices/fb';
+import { logout } from '../../fbServices/fbAuth';
 import './header.css';
 
 const Header = () => {
@@ -10,9 +14,12 @@ const Header = () => {
     isLoggedIn,
     setIsLoggedIn,
     languages,
+
+    setUserName,
   } = Ctx();
 
   const { lang } = languages[selectedLanguage];
+  const navigate = useNavigate();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -20,9 +27,27 @@ const Header = () => {
     setSelectedLanguage(e.target.value);
   };
 
-  const logout = () => {
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        const uid = user.uid;
+
+        setUserName({ uid, email: user.email });
+        navigate('/');
+        // ...
+      } else {
+        // User is signed out
+        setUserName(null);
+      }
+    });
+    // eslint-disable-next-line
+  }, []);
+
+  const deAuth = () => {
     setIsLoggedIn(false);
-    toggleMenu();
+    logout();
   };
 
   const toggleMenu = () => {
@@ -33,7 +58,7 @@ const Header = () => {
     <header className="header">
       <div className="header-content">
         <div className="logo">
-          <Link to="/">rm-Game App</Link>
+          <Link to="/">RM-Games</Link>
         </div>
         <div className="hamburger" onClick={toggleMenu}>
           <span className="bar"></span>
@@ -52,7 +77,7 @@ const Header = () => {
           </Link>
           {isLoggedIn ? (
             <>
-              <p className="logout" onClick={logout}>
+              <p className="logout" onClick={deAuth}>
                 {lang.LogoutButton}
               </p>
             </>

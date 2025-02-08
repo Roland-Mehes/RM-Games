@@ -1,15 +1,24 @@
+.board-container {
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(35px);
+  margin: 0 2rem 2rem;
+  border-radius: 20px;
+}
+
 .board h3 {
-  color: #333;
+  color: #fff;
   letter-spacing: 1px;
+  text-shadow: 1px 1px 2px black;
 }
 
 .board {
   margin: 10px auto 0;
   border-radius: 10px;
-  background: linear-gradient(135deg, #6a1b9a, #4a00e0);
   box-shadow: 1px 1px 8px 3px rgb(0 0 0);
-  width: 350px;
+  max-width: 300px;
+  min-width: 300px;
   position: relative;
+  backdrop-filter: blur(5px);
 }
 
 .wordle-refresh-btn {
@@ -17,12 +26,26 @@
   top: 0;
   right: 0;
   color: #f0f0f0;
+  transition: transform 0.3s ease-in-out;
 }
 
 .wordle-refresh-btn:hover {
   color: #4caf50;
-  rotate: -40deg;
-  transition: rotate 0.3s;
+  transform: rotate(-40deg);
+}
+
+.wordle-msg-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.3rem;
+  text-align: center;
+  height: 70px;
+  color: red;
+  text-shadow: 1px 0px 2px #fff;
+}
+
+.wordle-msg {
+  text-shadow: 3px 2px 2px black;
 }
 
 .line {
@@ -52,7 +75,7 @@
 
 .cell.present {
   background-color: #ffeb3b;
-  color: black;
+  color: white;
 }
 
 .cell.absent {
@@ -72,6 +95,38 @@
 
 .final .cell.correct {
   animation: correctCell 1s ease-in-out;
+}
+
+.new-game-button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.new-game-button {
+  padding: 12px 25px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #2196f3;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 4px;
+}
+
+.new-game-button:hover {
+  background-color: #1976d2;
+}
+
+.new-game-button:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(33, 150, 243, 0.6);
+}
+
+.solution {
+  color: red;
 }
 
 @keyframes correctCell {
@@ -104,30 +159,13 @@
   }
 }
 
-.new-game-button-container {
-  text-align: center;
-  margin-top: 20px;
-}
+@media (max-width: 360px) {
+  .board {
+    max-width: 80vw;
+  }
 
-.new-game-button {
-  padding: 12px 25px;
-  font-size: 18px;
-  font-weight: 600;
-  color: #fff;
-  background-color: #2196f3;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 4px;
-}
-
-.new-game-button:hover {
-  background-color: #1976d2;
-}
-
-.new-game-button:focus {
-  outline: none;
-  box-shadow: 0 0 10px rgba(33, 150, 243, 0.6);
+  .cell {
+    width: 40px;
+    height: 40px;
+  }
 }

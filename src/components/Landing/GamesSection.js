@@ -12,6 +12,7 @@ const GamesSection = () => {
       <h2>{gameSectionHeader}</h2>
       <div className="games-list">
         <GameCard
+          title="Worlde"
           imgSrc="./img/wordle.png"
           imgWidth="auto"
           imgHeight="2rem"

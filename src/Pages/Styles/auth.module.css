@@ -1,0 +1,60 @@
+.login-container {
+  display: flex;
+  margin: auto;
+  background-color: rgba(155, 126, 163, 0.5);
+  backdrop-filter: blur(20px);
+  border: 3px solid black;
+  width: 50rem;
+  height: 25rem;
+  border-radius: 15px;
+  justify-content: space-between;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  border: 1px solid black;
+  padding: 2rem;
+  border-radius: 5px;
+}
+
+.login-container input[type='email'],
+input[type='password'] {
+  width: 100%;
+  padding: 1rem 2rem;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.remember-me {
+  display: flex;
+  justify-content: center;
+}
+
+.remember-me input[type='checkbox'] {
+  display: block;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.btnContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+button {
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: none;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+button[type='submit'] {
+  width: 50%;
+}

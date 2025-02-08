@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="footer-links">
           <a href="/privacy-policy">Privacy Policy</a>
           <a href="/terms-of-service">Terms of Service</a>
-          <a href="www.linkedin.com/in/roland-mehes">
+          <a href="https://linkedin.com/in/roland-mehes">
             <CiLinkedin size={25} />
           </a>
           <a href="https://github.com/Roland-Mehes">

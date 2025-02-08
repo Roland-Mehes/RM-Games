@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Ctx } from '../../../context/LanguageContext';
 import HangmanBodyDraw from './HangmanBodyDraw';
 import HangmanWord from './HangmanWord';
+import HangmanRestart from './HangmanRestart';
 
 function Hangman() {
   const [wordToGuess, setWordToGuess] = useState('');
@@ -65,28 +66,38 @@ function Hangman() {
 
   return (
     <>
-      <div className="hangman-container">
-        <div className="hangman-header">
-          {isWinner && 'WINNER - Refresh to try again '}
-          {isLoser && 'Nice Try '}
-        </div>
-        <HangmanBodyDraw numberOfGuesses={inCorrectLetters.length} />
-        <HangmanWord
-          reveal={isLoser}
-          guessedLetters={guessedLetters}
-          wordToGuess={wordToGuess}
-        />
+      <div className="main-container">
+        <div className="hangman-container">
+          <div className="hangman-header">
+            {isWinner && 'WINNER - Refresh to try again '}
+            {isLoser && 'Nice Try '}
+          </div>
+          <HangmanBodyDraw numberOfGuesses={inCorrectLetters.length} />
+          <HangmanWord
+            reveal={isLoser}
+            guessedLetters={guessedLetters}
+            wordToGuess={wordToGuess}
+          />
 
-        <div className="hangman-keyboard-container"></div>
+          <div className="hangman-keyboard-container"></div>
+        </div>
+        <HangmanRestart
+          isWinner={isWinner}
+          isLoser={isLoser}
+          onRestart={() => {
+            setWordToGuess(randomWord());
+            setGuessedLetters([]);
+          }}
+        />
+        <HangmanKeyboard
+          disabled={isWinner || isLoser}
+          activeLetters={guessedLetters.filter((letter) =>
+            wordToGuess.includes(letter)
+          )}
+          inactiveLetters={inCorrectLetters}
+          addGuessedletter={addGuessedLetter}
+        />
       </div>
-      <HangmanKeyboard
-        disabled={isWinner || isLoser}
-        activeLetters={guessedLetters.filter((letter) =>
-          wordToGuess.includes(letter)
-        )}
-        inactiveLetters={inCorrectLetters}
-        addGuessedletter={addGuessedLetter}
-      />
     </>
   );
 }

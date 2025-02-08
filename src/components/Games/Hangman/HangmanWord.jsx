@@ -1,17 +1,9 @@
 import React from 'react';
+import './HangmanWord.css';
 
 function HangmanWord({ wordToGuess, guessedLetters, reveal = false }) {
   return (
-    <div
-      style={{
-        display: 'flex',
-        gap: '.25rem',
-        fontSize: '2rem',
-        fontWeight: 'bold',
-        textTransform: 'uppercase',
-        fontFamily: 'monospace',
-      }}
-    >
+    <div className="hangman-word">
       {wordToGuess.split('').map((letter, index) => (
         <span style={{ borderBottom: '.1em solid black' }} key={index}>
           <span

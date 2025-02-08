@@ -22,6 +22,14 @@ export const webLang = {
     'Challenges every day',
     'Excellent for fun and brain exercise',
   ],
+
+  // text for Wordle Game
+  wordleGuessTheWord: 'Try to guess the word',
+  wordleWordIsNotInDatabase: 'This word is not in our List of Words',
+  wordleGameOver: 'Game over.',
+
+  //Common game Text
+  gameOverText: 'Try Again',
 };
 
 export const enKeyboard = [

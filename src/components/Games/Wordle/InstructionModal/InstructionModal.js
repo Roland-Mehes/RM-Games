@@ -1,10 +1,10 @@
-import './InstructionModal.css';
+import styles from './InstructionModal.module.css';
 
 const InstructionModal = ({ onClose }) => {
   return (
-    <div className="modal">
-      <div className="modal-close-button">X</div>
-      <div className="modal-content">
+    <div className={styles.modal}>
+      <div className={styles['modal-close-button']}>X</div>
+      <div className={styles['modal-content']}>
         <h2>Instructions</h2>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -12,7 +12,7 @@ const InstructionModal = ({ onClose }) => {
           height="200"
           viewBox="0 0 500 200"
         >
-          {/* <!-- Helyes betű és hely (zöld) --> */}
+          {/* Helyes betű és hely (zöld) */}
           <rect
             x="10"
             y="10"
@@ -20,20 +20,20 @@ const InstructionModal = ({ onClose }) => {
             height="80"
             fill="#4caf50"
             stroke="#000"
-            stroke-width="2"
+            strokeWidth="2"
           />
           <text
             x="50"
             y="60"
-            font-size="40"
-            font-family="Arial"
+            fontSize="40"
+            fontFamily="Arial"
             fill="white"
-            text-anchor="middle"
+            textAnchor="middle"
           >
             A
           </text>
 
-          {/* <!-- Helyes betű, rossz hely (sárga) --> */}
+          {/* Helyes betű, rossz hely (sárga) */}
           <rect
             x="100"
             y="10"
@@ -41,20 +41,20 @@ const InstructionModal = ({ onClose }) => {
             height="80"
             fill="#ffeb3b"
             stroke="#000"
-            stroke-width="2"
+            strokeWidth="2"
           />
           <text
             x="140"
             y="60"
-            font-size="40"
-            font-family="Arial"
+            fontSize="40"
+            fontFamily="Arial"
             fill="#000"
-            text-anchor="middle"
+            textAnchor="middle"
           >
             B
           </text>
 
-          {/* <!-- Hibás betű (szürke) --> */}
+          {/* Hibás betű (szürke) */}
           <rect
             x="190"
             y="10"
@@ -62,20 +62,20 @@ const InstructionModal = ({ onClose }) => {
             height="80"
             fill="#bdbdbd"
             stroke="#000"
-            stroke-width="2"
+            strokeWidth="2"
           />
           <text
             x="230"
             y="60"
-            font-size="40"
-            font-family="Arial"
+            fontSize="40"
+            fontFamily="Arial"
             fill="#000"
-            text-anchor="middle"
+            textAnchor="middle"
           >
             C
           </text>
 
-          {/* <!-- Piros - a szó nincs az adatbázisban --> */}
+          {/* Piros - a szó nincs az adatbázisban */}
           <rect
             x="280"
             y="10"
@@ -83,20 +83,20 @@ const InstructionModal = ({ onClose }) => {
             height="80"
             fill="red"
             stroke="#000"
-            stroke-width="2"
+            strokeWidth="2"
           />
           <text
             x="320"
             y="60"
-            font-size="40"
-            font-family="Arial"
+            fontSize="40"
+            fontFamily="Arial"
             fill="white"
-            text-anchor="middle"
+            textAnchor="middle"
           >
             D
           </text>
 
-          {/* <!-- Üres mező például --> */}
+          {/* Üres mező például */}
           <rect
             x="370"
             y="10"
@@ -104,31 +104,31 @@ const InstructionModal = ({ onClose }) => {
             height="80"
             fill="white"
             stroke="#000"
-            stroke-width="2"
+            strokeWidth="2"
           />
           <text
             x="410"
             y="60"
-            font-size="40"
-            font-family="Arial"
+            fontSize="40"
+            fontFamily="Arial"
             fill="#000"
-            text-anchor="middle"
+            textAnchor="middle"
           >
             E
           </text>
 
-          {/* <!-- Leírások --> */}
-          <text x="10" y="120" font-size="16" font-family="Arial" fill="#000">
-            Zöld: Helyes betű, helyes pozíció
+          {/* Leírások */}
+          <text x="10" y="120" fontSize="16" fontFamily="Arial" fill="#000">
+            GREEN : Correct Letter and Position
           </text>
-          <text x="10" y="140" font-size="16" font-family="Arial" fill="#000">
-            Sárga: Helyes betű, rossz hely
+          <text x="10" y="140" fontSize="16" fontFamily="Arial" fill="#000">
+            Yellow: Correct letter wrong position
           </text>
-          <text x="10" y="160" font-size="16" font-family="Arial" fill="#000">
-            Szürke: Hibás betű
+          <text x="10" y="160" fontSize="16" fontFamily="Arial" fill="#000">
+            GRAY: Wrong letter
           </text>
-          <text x="10" y="180" font-size="16" font-family="Arial" fill="#000">
-            Piros: A szó nincs az adatbázisban
+          <text x="10" y="180" fontSize="16" fontFamily="Arial" fill="#000">
+            RED : Word is not in our database
           </text>
         </svg>
 

@@ -22,6 +22,15 @@ export const webLang = {
     'Provocări în fiecare zi',
     'Excelent pentru distracție și exerciții pentru minte',
   ],
+
+  // text for Wordle Game
+  wordleGuessTheWord: 'Găsește cuvântul!',
+  wordleWordIsNotInDatabase:
+    'Acest cuvânt nu este în lista noastră de cuvinte.',
+  wordleGameOver: 'Joc terminat. Cuvântul a fost: ',
+
+  //Common game Text
+  gameOverText: 'Încearcă din nou',
 };
 
 export const roKeyboard = [
