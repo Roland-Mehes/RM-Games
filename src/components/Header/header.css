@@ -24,9 +24,10 @@
   text-decoration: none;
   color: #fefefe;
   font-size: 2rem;
-  font-family: 'Rubik Bubbles', serif;
+  font-family: 'Rubik Iso', serif;
   border: 5px dashed rgba(78, 43, 69, 0.5);
-  border-radius: 10px 30px 5% 30px;
+  border-radius: 5px 35px 5px 35px;
+  padding: 0 14px 0 14px;
 }
 
 .nav-links {
@@ -39,6 +40,8 @@
   color: #fff;
   margin: 0 0.5rem;
   transition: color 0.3s ease;
+  font-family: 'Risque', serif;
+  letter-spacing: 3px;
 }
 
 .logout {

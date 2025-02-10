@@ -33,7 +33,7 @@ const Header = () => {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
         const uid = user.uid;
-
+        console.log('>>>on auth state change>>>', user.email);
         setUserName({ uid, email: user.email });
         navigate('/');
         // ...
@@ -69,9 +69,9 @@ const Header = () => {
           <Link to="/" onClick={toggleMenu}>
             Home
           </Link>
-          <Link to="/games" onClick={toggleMenu}>
+          {/* <Link to="/games" onClick={toggleMenu}>
             {lang.gameButton}
-          </Link>
+          </Link> */}
           <Link to="/records" onClick={toggleMenu}>
             {lang.records}
           </Link>

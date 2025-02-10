@@ -1,50 +1,91 @@
-import { Ctx } from '../../context/LanguageContext';
-import './records.css';
+import React, { useEffect, useState } from 'react';
+import { db } from '../../fbServices/fb';
+import { collection, getDocs } from 'firebase/firestore';
+import styles from './records.module.css';
 
 const Records = () => {
-  const { userName } = Ctx();
+  const [selectedGame, setSelectedGame] = useState('');
+  const [games, setGames] = useState([]);
+  const [userStats, setUserStats] = useState([]);
+
+  // fecthcing the game names
+  useEffect(() => {
+    const fetchGames = async () => {
+      // adding the WORDLE and HANGMAN to the select
+      setGames(['wordle', 'hangman']);
+    };
+    fetchGames();
+  }, []);
+
+  // Return the value based on select
+  const fetchUserStats = async (game) => {
+    const userStatsArray = [];
+    const querySnapshot = await getDocs(collection(db, 'users'));
+
+    querySnapshot.forEach((doc) => {
+      const userData = doc.data();
+      if (userData[game]) {
+        userStatsArray.push({
+          // username: doc.id,
+          username: userData.username,
+          win: userData[game].win,
+          lose: userData[game].lose,
+        });
+      }
+    });
+    setUserStats(userStatsArray);
+  };
+
+  // Dropdown handleing
+  const handleGameSelection = (event) => {
+    const selected = event.target.value;
+    setSelectedGame(selected);
+    if (selected) {
+      fetchUserStats(selected);
+    } else {
+      setUserStats([]);
+    }
+  };
 
   return (
-    <div className="records-container">
-      {userName ? (
-        <div>
-          <select>
-            <option>Val1</option>
-            <option>Val1</option>
-            <option>Val1</option>
-          </select>
-          <div>
-            <div className="container-win">
-              <p>
-                Win : <span></span>
-              </p>
-            </div>
-            <div className="container-lose">
-              <p>
-                Losses : <span></span>
-              </p>
-            </div>
-          </div>
-        </div>
-      ) : (
-        // Render the whole Record list with all the Users
+    <div className={styles['records-container']}>
+      <h2
+        style={{
+          textAlign: 'center',
+          borderBottom: '1px solid #333',
+          marginBottom: '.3rem',
+        }}
+      >
+        Game Statistics
+      </h2>
 
-        <table style={{ borderCollapse: 'collapse' }}>
-          <caption>
-            [CurrentGame]
-            <select>
-              <option> Games</option>
-            </select>
-          </caption>
-          <thead>
-            <tr>
-              <th>UserName</th>
-              <th>Wins</th>
-              <th>Losses</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+      {/* Dropdown menu */}
+      <select
+        onChange={handleGameSelection}
+        value={selectedGame}
+        className={styles['select']}
+      >
+        <option value="">Select Game</option>
+        {games.map((game) => (
+          <option key={game} value={game}>
+            {game.charAt(0).toUpperCase() + game.slice(1)}
+          </option>
+        ))}
+      </select>
+
+      {/* Render data based on select */}
+      {userStats.length > 0 && (
+        <div className={styles['records-content']}>
+          <h3>{selectedGame} Statistics</h3>
+          <ul>
+            {userStats.map((user) => (
+              <li key={user.username}>
+                <strong>{user.username}</strong>: {user.win} Wins, {user.lose}{' '}
+                Losses
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );

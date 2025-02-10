@@ -4,6 +4,7 @@ import './game.css';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import Keyboard from '../../Keyboard/keyboard';
 import InstructionModal from './InstructionModal/InstructionModal';
+import { IoIosHelpCircleOutline } from 'react-icons/io';
 
 const Wordle = () => {
   const [solution, setSolution] = useState(''); // The secret word
@@ -13,7 +14,7 @@ const Wordle = () => {
   const [msg, setMsg] = useState('');
   const [isError, setIsError] = useState(Array(6).fill(false)); // Track errors for each line
   const [testMode, setTestMode] = useState(true); // Enable or disable test mode
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { selectedLanguage, languageData, languages } = Ctx(); // Get language and words from context
   const { selectedWords } = languageData; // The word list
@@ -119,9 +120,16 @@ const Wordle = () => {
     <>
       <div className="board-container">
         <div className="board">
+          <IoIosHelpCircleOutline
+            size="30"
+            onClick={() => setIsModalOpen(true)}
+            style={{ cursor: 'pointer', color: 'white' }}
+          />
+
           <div className="wordle-refresh-btn">
             <HiOutlineRefresh size="30" onClick={gameRestart} />
           </div>
+
           <div className="wordle-msg-container">
             <h3 style={{ whiteSpace: 'pre-line' }}>{selectedLanguage}</h3>
 
@@ -157,12 +165,11 @@ const Wordle = () => {
           <div className="keyboard">
             <Keyboard keyPressed={handleType} />
           </div>
-        </div>{' '}
-        {/* Ezt hiányzott! */}
-        {isModalOpen && (
-          <InstructionModal onClose={() => setIsModalOpen(false)} />
-        )}
+        </div>
       </div>
+      {isModalOpen && (
+        <InstructionModal toggleModalProp={() => setIsModalOpen(false)} />
+      )}
     </>
   );
 };
