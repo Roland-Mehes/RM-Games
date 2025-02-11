@@ -4,7 +4,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url('../public/img/background.jpeg') no-repeat center center fixed;
+  background: url('../public/img/background-ultraMinimalist.png') no-repeat
+    center center fixed;
   background-size: cover;
   overflow-x: hidden;
   height: 100%;

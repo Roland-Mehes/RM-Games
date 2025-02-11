@@ -1,10 +1,10 @@
+/* Base Header Styles */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: rgba(53, 75, 118);
-
+  background-color: #1e1e2e;
   color: #fff;
   position: relative;
   width: 100%;
@@ -25,7 +25,7 @@
   color: #fefefe;
   font-size: 2rem;
   font-family: 'Rubik Iso', serif;
-  border: 5px dashed rgba(78, 43, 69, 0.5);
+  border: 5px dashed rgba(80, 250, 123, 0.5);
   border-radius: 5px 35px 5px 35px;
   padding: 0 14px 0 14px;
 }
@@ -35,21 +35,21 @@
   gap: 1rem;
 }
 
-.nav-links a {
+.nav-links a,
+p {
   text-decoration: none;
-  color: #fff;
+  color: #a1a1b3;
   margin: 0 0.5rem;
   transition: color 0.3s ease;
   font-family: 'Risque', serif;
   letter-spacing: 3px;
-}
-
-.logout {
   cursor: pointer;
 }
 
-.nav-links a:hover {
-  color: #4caf50;
+/* On hover, use the light cool blue for emphasis */
+.nav-links a:hover,
+.nav-links p:hover {
+  color: #6272a4;
 }
 
 .user-actions a {
@@ -64,7 +64,7 @@
 }
 
 .language-selector {
-  background-color: #555;
+  background-color: #282a36;
   color: #fff;
   border: none;
   padding: 0.5rem;
@@ -96,7 +96,7 @@
   .nav-links {
     display: none;
     flex-direction: column;
-    background-color: #333;
+    background-color: #3b3d52;
     position: absolute;
     top: 100%;
     left: 0;

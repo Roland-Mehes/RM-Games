@@ -76,11 +76,7 @@ const Header = () => {
             {lang.records}
           </Link>
           {isLoggedIn ? (
-            <>
-              <p className="logout" onClick={deAuth}>
-                {lang.LogoutButton}
-              </p>
-            </>
+            <p onClick={deAuth}>LogOut</p>
           ) : (
             <>
               <Link to="/login" onClick={toggleMenu}>

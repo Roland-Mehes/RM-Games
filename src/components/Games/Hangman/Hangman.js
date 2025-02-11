@@ -4,12 +4,13 @@ import { useState, useEffect, useCallback } from 'react';
 import { Ctx } from '../../../context/LanguageContext';
 import HangmanBodyDraw from './HangmanBodyDraw';
 import HangmanWord from './HangmanWord';
-import HangmanRestart from './HangmanRestart';
+import { IoIosHelpCircleOutline } from 'react-icons/io';
+import { HiOutlineRefresh } from 'react-icons/hi';
 
 function Hangman() {
   const [wordToGuess, setWordToGuess] = useState('');
   const [guessedLetters, setGuessedLetters] = useState([]); // Store the guesses
-  const { selectedLanguage, languageData } = Ctx(); // Get language and words from context
+  const { selectedLanguage, languageData, isLoggedIn } = Ctx(); // Get language and words from context
   const { selectedWords } = languageData; // The word list
 
   const inCorrectLetters = guessedLetters.filter(
@@ -69,8 +70,20 @@ function Hangman() {
       <div className="main-container">
         <div className="hangman-container">
           <div className="hangman-header">
+            <IoIosHelpCircleOutline color="white" size="30" />
+            <>{isLoggedIn && <h3>WIN : 0</h3>}</>
             {isWinner && 'WINNER - Refresh to try again '}
             {isLoser && 'Nice Try '}
+            <>{isLoggedIn && <h3>Losses : 0</h3>}</>
+            <div className="refresh-button">
+              <HiOutlineRefresh
+                size="30"
+                onClick={() => {
+                  setWordToGuess(randomWord());
+                  setGuessedLetters([]);
+                }}
+              />
+            </div>
           </div>
           <HangmanBodyDraw numberOfGuesses={inCorrectLetters.length} />
           <HangmanWord
@@ -81,14 +94,14 @@ function Hangman() {
 
           <div className="hangman-keyboard-container"></div>
         </div>
-        <HangmanRestart
+        {/* <HangmanRestart
           isWinner={isWinner}
           isLoser={isLoser}
           onRestart={() => {
             setWordToGuess(randomWord());
             setGuessedLetters([]);
           }}
-        />
+        /> */}
         <HangmanKeyboard
           disabled={isWinner || isLoser}
           activeLetters={guessedLetters.filter((letter) =>

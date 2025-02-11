@@ -116,18 +116,39 @@ const Wordle = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedWords]);
 
+  /* Game WIn Lose Status */
+
   return (
     <>
       <div className="board-container">
         <div className="board">
-          <IoIosHelpCircleOutline
-            size="30"
-            onClick={() => setIsModalOpen(true)}
-            style={{ cursor: 'pointer', color: 'white' }}
-          />
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div>
+              <IoIosHelpCircleOutline
+                size="30"
+                onClick={() => setIsModalOpen(true)}
+                style={{ cursor: 'pointer', color: 'white' }}
+              />
+            </div>
 
-          <div className="wordle-refresh-btn">
-            <HiOutlineRefresh size="30" onClick={gameRestart} />
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '100%',
+                margin: '0 20px 0',
+              }}
+            >
+              <div className="">
+                <h3>WIN : 0</h3>
+              </div>
+              <div className="">
+                <h3>LOSE : 0</h3>
+              </div>
+            </div>
+            <div className="wordle-refresh-btn">
+              <HiOutlineRefresh size="30" onClick={gameRestart} />
+            </div>
           </div>
 
           <div className="wordle-msg-container">

@@ -1,41 +1,39 @@
 .benefits {
-  padding: 40px 20px;
-  background-color: rgba(53, 75, 118, 0.96);
-  color: white;
+  padding: 50px 20px;
+  background-color: #1e1e2e;
+  color: #f8f8f2;
   text-align: center;
-  font-family: 'Risque', serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .benefits h2 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-  letter-spacing: 10px;
+  font-size: 2.2rem;
+  margin-bottom: 25px;
+  font-weight: bold;
 }
 
 .benefits ul {
-  letter-spacing: 5px;
-
   list-style: none;
   margin: 0 auto;
   padding: 0;
-  max-width: 800px;
+  max-width: 700px;
   text-align: left;
 }
 
 .benefits li {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin: 10px 0;
-  padding-left: 40px;
+  padding-left: 30px;
   position: relative;
   line-height: 1.6;
+  opacity: 0.9;
 }
 
 .benefits li::before {
-  content: '🌟';
-  color: #ffc107;
-  font-size: 1.5rem;
+  content: '✔';
+  color: #50fa7b;
+  font-size: 1.2rem;
   position: absolute;
   left: 0;
-  top: 0;
+  top: 3px;
 }

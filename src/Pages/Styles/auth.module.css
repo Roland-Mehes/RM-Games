@@ -1,7 +1,7 @@
 .login-container {
   display: flex;
   margin: auto;
-  background-color: rgba(155, 126, 163, 0.5);
+  background-color: var(--main-color);
   backdrop-filter: blur(20px);
   border: 3px solid black;
   width: 50rem;
@@ -17,6 +17,8 @@
   border: 1px solid black;
   padding: 2rem;
   border-radius: 5px;
+  background-color: var(--second-color);
+  color: #fff;
 }
 
 .login-container input {
@@ -52,8 +54,14 @@ button {
   border: none;
   gap: 1rem;
   cursor: pointer;
+  background-color: #6272a4;
 }
 
 button[type='submit'] {
   width: 50%;
+}
+
+button:hover {
+  background-color: #50fa7b;
+  transform: scale(1.05);
 }

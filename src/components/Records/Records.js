@@ -11,7 +11,7 @@ const Records = () => {
   // fecthcing the game names
   useEffect(() => {
     const fetchGames = async () => {
-      // adding the WORDLE and HANGMAN to the select
+      // adding the WORDLE and HANGMAN to the select[state]
       setGames(['wordle', 'hangman']);
     };
     fetchGames();
@@ -26,7 +26,6 @@ const Records = () => {
       const userData = doc.data();
       if (userData[game]) {
         userStatsArray.push({
-          // username: doc.id,
           username: userData.username,
           win: userData[game].win,
           lose: userData[game].lose,
@@ -52,8 +51,8 @@ const Records = () => {
       <h2
         style={{
           textAlign: 'center',
-          borderBottom: '1px solid #333',
-          marginBottom: '.3rem',
+          borderBottom: '1px solid #fff',
+          marginBottom: '1rem',
         }}
       >
         Game Statistics
