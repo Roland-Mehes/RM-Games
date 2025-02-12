@@ -14,7 +14,6 @@ const Header = () => {
     isLoggedIn,
     setIsLoggedIn,
     languages,
-
     setUserName,
   } = Ctx();
 

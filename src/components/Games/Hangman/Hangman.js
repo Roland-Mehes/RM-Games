@@ -6,6 +6,7 @@ import HangmanBodyDraw from './HangmanBodyDraw';
 import HangmanWord from './HangmanWord';
 import { IoIosHelpCircleOutline } from 'react-icons/io';
 import { HiOutlineRefresh } from 'react-icons/hi';
+import WinLose from '../services/winLose';
 
 function Hangman() {
   const [wordToGuess, setWordToGuess] = useState('');
@@ -71,10 +72,10 @@ function Hangman() {
         <div className="hangman-container">
           <div className="hangman-header">
             <IoIosHelpCircleOutline color="white" size="30" />
-            <>{isLoggedIn && <h3>WIN : 0</h3>}</>
+            <>{isLoggedIn && <WinLose game="hangman" win="true" />}</>
             {isWinner && 'WINNER - Refresh to try again '}
             {isLoser && 'Nice Try '}
-            <>{isLoggedIn && <h3>Losses : 0</h3>}</>
+            <>{isLoggedIn && <WinLose game="hangman" lose="true" />}</>
             <div className="refresh-button">
               <HiOutlineRefresh
                 size="30"
@@ -94,14 +95,6 @@ function Hangman() {
 
           <div className="hangman-keyboard-container"></div>
         </div>
-        {/* <HangmanRestart
-          isWinner={isWinner}
-          isLoser={isLoser}
-          onRestart={() => {
-            setWordToGuess(randomWord());
-            setGuessedLetters([]);
-          }}
-        /> */}
         <HangmanKeyboard
           disabled={isWinner || isLoser}
           activeLetters={guessedLetters.filter((letter) =>
