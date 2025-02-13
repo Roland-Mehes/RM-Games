@@ -7,12 +7,15 @@ import HangmanWord from './HangmanWord';
 import { IoIosHelpCircleOutline } from 'react-icons/io';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import WinLose from '../services/winLose';
+import { writeUserData, readUserData } from '../../../fbServices/fbDB';
 
 function Hangman() {
   const [wordToGuess, setWordToGuess] = useState('');
   const [guessedLetters, setGuessedLetters] = useState([]); // Store the guesses
-  const { selectedLanguage, languageData, isLoggedIn } = Ctx(); // Get language and words from context
+  const { selectedLanguage, languageData, isLoggedIn, userName } = Ctx(); // Get language and words from context
   const { selectedWords } = languageData; // The word list
+  const [currentWin, setCurrentWin] = useState();
+  const [currentLose, setCurrentLose] = useState();
 
   const inCorrectLetters = guessedLetters.filter(
     (letter) => wordToGuess && !wordToGuess.includes(letter)
@@ -64,8 +67,35 @@ function Hangman() {
       document.removeEventListener('keypress', handler);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [guessedLetters]);
+  }, [guessedLetters, addGuessedLetter]);
 
+  useEffect(() => {
+    const handleWinLoseIncrementer = async () => {
+      if (userName?.uid) {
+        const res = await readUserData(userName.uid);
+
+        setCurrentWin(res?.hangman?.win);
+        setCurrentLose(res?.hangman?.lose);
+        let dataWIN = currentWin;
+        let dataLOSE = currentLose;
+        if (isWinner) {
+          setCurrentWin(dataWIN++);
+          console.log(currentWin);
+        }
+        if (isLoser) {
+          setCurrentLose(dataLOSE++);
+        }
+        await writeUserData(userName.uid, {
+          hangman: {
+            win: currentWin,
+            lose: currentLose,
+          },
+        });
+      }
+    };
+    return () => handleWinLoseIncrementer();
+    // eslint-disable-next-line
+  }, [currentWin, currentLose]);
   return (
     <>
       <div className="main-container">
