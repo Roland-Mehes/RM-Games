@@ -1,5 +1,5 @@
 import './Hangman.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Ctx } from '../../../context/LanguageContext';
 import { IoIosHelpCircleOutline } from 'react-icons/io';
 import { HiOutlineRefresh } from 'react-icons/hi';
@@ -9,37 +9,100 @@ import HangmanKeyboard from './HangmanKeyboard';
 import HangmanModal from './InstructionModal/HangmanModal';
 import WinLose from '../services/winLose';
 import useFirebase from './customHooks/useFirebase';
-import { useRandomWordGenerator } from './customHooks/useRandomWordGenerator';
-import { useHangmanGame } from './customHooks/useHangmanGame';
+import useRandomWordGenerator from './customHooks/useRandomWordGenerator';
 
 function Hangman() {
+  const [wordToGuess, setWordToGuess] = useState('');
+  const [guessedLetters, setGuessedLetters] = useState([]);
   const { languageData, isLoggedIn, userName } = Ctx();
   const { selectedWords } = languageData;
   const randomWord = useRandomWordGenerator();
 
-  const [wordToGuess, setWordToGuess] = useState('');
+  const [isWinner, setIsWinner] = useState(false);
+  const [isLoser, setIsLoser] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { userStats, setUserStats } = useFirebase(userName, {
-    win: 0,
-    lose: 0,
-  });
-
-  const {
-    guessedLetters,
+  const { userStats, setUserStats } = useFirebase(
+    userName,
+    { win: 0, lose: 0 },
     isWinner,
-    isLoser,
-    addGuessedLetter,
-    inCorrectLetters,
-  } = useHangmanGame(wordToGuess, setUserStats);
+    isLoser
+  );
+
+  const inCorrectLetters = guessedLetters.filter(
+    (letter) => wordToGuess && !wordToGuess.includes(letter)
+  );
+
+  console.log(wordToGuess);
 
   // Restart the game with a new word
   useEffect(() => {
     if (selectedWords.length > 0) {
       setWordToGuess(randomWord());
+      setGuessedLetters([]);
+      setIsWinner(false);
+      setIsLoser(false);
     }
   }, [selectedWords, randomWord]);
 
-  console.log(wordToGuess);
+  // Add guessed letter
+  const addGuessedLetter = useCallback(
+    (letter) => {
+      if (guessedLetters.includes(letter) || isLoser || isWinner) return;
+
+      setGuessedLetters((currentLetters) => [...currentLetters, letter]);
+    },
+    [guessedLetters, isWinner, isLoser]
+  );
+
+  // Key press handler
+  useEffect(() => {
+    const handler = (event) => {
+      const key = event.key;
+      if (!key.match(/^[a-záéíóöőúüűăâîșț]{1}$/)) return;
+      event.preventDefault();
+      addGuessedLetter(key);
+    };
+    document.addEventListener('keypress', handler);
+    return () => document.removeEventListener('keypress', handler);
+  }, [guessedLetters, addGuessedLetter]);
+
+  // Local update for game stats
+  useEffect(() => {
+    const checkGameStatus = () => {
+      const isGameWinner = wordToGuess
+        .split('')
+        .every((letter) => guessedLetters.includes(letter));
+
+      const isGameLoser = inCorrectLetters.length >= 6;
+
+      if (isGameWinner && !isWinner) {
+        setIsWinner(true);
+        setUserStats((prevStats) => ({
+          ...prevStats,
+          win: prevStats.win + 1,
+        }));
+      }
+
+      if (isGameLoser && !isLoser) {
+        setIsLoser(true);
+        setUserStats((prevStats) => ({
+          ...prevStats,
+          lose: prevStats.lose + 1,
+        }));
+      }
+    };
+
+    if (wordToGuess && !isWinner && !isLoser) {
+      checkGameStatus();
+    }
+  }, [
+    guessedLetters,
+    wordToGuess,
+    inCorrectLetters,
+    isWinner,
+    isLoser,
+    setUserStats,
+  ]);
 
   return (
     <>
@@ -65,6 +128,9 @@ function Hangman() {
                 size="30"
                 onClick={() => {
                   setWordToGuess(randomWord());
+                  setGuessedLetters([]);
+                  setIsWinner(false);
+                  setIsLoser(false);
                 }}
               />
             </div>

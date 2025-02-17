@@ -34,18 +34,19 @@ const Header = () => {
         const uid = user.uid;
         console.log('>>>on auth state change>>>', user.email);
         setUserName({ uid, email: user.email });
+        setIsLoggedIn(true);
         navigate('/');
         // ...
       } else {
         // User is signed out
         setUserName(null);
+        setIsLoggedIn(false);
       }
     });
     // eslint-disable-next-line
   }, []);
 
   const deAuth = () => {
-    setIsLoggedIn(false);
     logout();
   };
 

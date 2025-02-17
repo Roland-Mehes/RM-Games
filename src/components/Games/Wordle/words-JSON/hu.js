@@ -28,8 +28,33 @@ export const webLang = {
   wordleWordIsNotInDatabase: 'Ez a szó nincs a szavaink listájában.',
   wordleGameOver: 'Játék vége. A helyes szó: ',
 
+  wordleRules: {
+    title: '🪓 Wordle Játék Útmutató',
+    description:
+      'A Wordle játék célja, hogy kitaláljuk az 5 betűs szót 6 próbálkozásból. Minden egyes próbálkozás után a következő visszajelzéseket kapjuk:',
+    rules: [
+      'HELLO - Az első négy karakter megfelel a szónak',
+      'a "H" és "E" zöld, mert a helyük helyes',
+      'L" és "L" sárga, mert benne van a szóban, de más helyen',
+      'O" szürke, mivel nem szerepel a szóban.',
+    ],
+    lose: 'WORLD - Ha hibát követünk el, piros hiba animációval értesít minket a játék.',
+  },
+
   //Common game Text
   gameOverText: 'Próbáld újra',
+
+  // text for Hangman Modal
+  hangmanRules: {
+    title: '🪓 Hangman szabályai',
+    description:
+      'A Hangman játék célja, hogy kitaláld a titkos szót betűnként.',
+    rules: [
+      'Minden rossz tipp után egy részlet rajzolódik ki: 😶 fej, 🥼 test, ✋ karok és 🦵 lábak.',
+      '💀 Ha a figura teljesen elkészül, vesztettél.',
+      '🏆 Ha kitalálod a szót, mielőtt a figura elkészül, nyertél!',
+    ],
+  },
 };
 
 export const huKeyboard = [

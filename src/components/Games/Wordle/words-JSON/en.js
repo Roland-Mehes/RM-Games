@@ -28,8 +28,33 @@ export const webLang = {
   wordleWordIsNotInDatabase: 'This word is not in our List of Words',
   wordleGameOver: 'Game over.',
 
+  wordleRules: {
+    title: '🪓 Wordle Game Guide',
+    description:
+      'The goal of the Wordle game is to guess the 5-letter word in 6 attempts. After each attempt, we receive the following feedback:',
+    rules: [
+      'HELLO - The first four characters match the word',
+      '"H" and "E" are green because they are in the correct position',
+      '"L" and "L" are yellow because they are in the word but in a different position',
+      '"O" is gray because it is not in the word.',
+    ],
+    lose: 'WORLD - If we make a mistake, the game notifies us with a red error animation.',
+  },
+
   //Common game Text
   gameOverText: 'Try Again',
+
+  // text for Hangman Modal
+  hangmanRules: {
+    title: '🪓 Hangman Rules',
+    description:
+      'The goal of the Hangman game is to guess the secret word letter by letter.',
+    rules: [
+      'For each incorrect guess, a part of the figure is drawn: 😶 head, 🥼 body, ✋ arms, and 🦵 legs.',
+      '💀 If the figure is completely drawn, you lose.',
+      '🏆 If you guess the word before the figure is complete, you win!',
+    ],
+  },
 };
 
 export const enKeyboard = [

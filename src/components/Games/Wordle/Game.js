@@ -5,6 +5,7 @@ import { HiOutlineRefresh } from 'react-icons/hi';
 import Keyboard from '../../Keyboard/keyboard';
 import InstructionModal from './InstructionModal/InstructionModal';
 import { IoIosHelpCircleOutline } from 'react-icons/io';
+import WinLose from '../services/winLose';
 
 const Wordle = () => {
   const [solution, setSolution] = useState(''); // The secret word
@@ -140,10 +141,10 @@ const Wordle = () => {
               }}
             >
               <div className="">
-                <h3>WIN : 0</h3>
+                <WinLose game="wordle" win="true" />
               </div>
               <div className="">
-                <h3>LOSE : 0</h3>
+                <WinLose game="wordle" lose="true" />
               </div>
             </div>
             <div className="wordle-refresh-btn">

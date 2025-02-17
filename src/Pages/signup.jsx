@@ -11,8 +11,13 @@ const Signup = () => {
     const username = formData.get('username');
     const psw = formData.get('psw');
 
+    if (psw.length < 6) {
+      alert('Password must be at least 6 characters long.');
+      return;
+    }
+
     try {
-      const userCredential = await signup(email, username, psw);
+      const userCredential = await signup(email, psw);
       const user = userCredential.user; // Firebase Authentication User
 
       await writeUserData(user.uid, {
@@ -31,7 +36,7 @@ const Signup = () => {
 
       console.log('User registered and data saved:', user);
     } catch (error) {
-      console.log('Error during signup:', error);
+      alert('Signup failed: ' + error.message);
     }
   };
 
@@ -39,8 +44,18 @@ const Signup = () => {
     <div className={styles['login-container']}>
       <form onSubmit={handleSubmit}>
         <input type="email" name="email" placeholder="Email" />
-        <input type="text" name="username" placeholder=" Username" />
-        <input type="password" name="psw" placeholder="Password" />
+        <input
+          type="text"
+          name="username"
+          placeholder=" Username"
+          autoComplete="username"
+        />
+        <input
+          type="password"
+          name="psw"
+          placeholder="Password"
+          autoComplete="current-password"
+        />
         <button type="submit" style={{ alignSelf: 'center' }}>
           SignUp
         </button>
