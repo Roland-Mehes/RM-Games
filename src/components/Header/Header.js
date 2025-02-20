@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../../fbServices/fb';
 import { logout } from '../../fbServices/fbAuth';
 import './header.css';
+import { useHandleDisplayUserName } from '../customHooks/useFetchUserName';
 
 const Header = () => {
   const {
@@ -21,6 +22,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const displayUserName = useHandleDisplayUserName();
 
   const handleLanguageChange = (e) => {
     setSelectedLanguage(e.target.value);
@@ -32,7 +34,7 @@ const Header = () => {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
         const uid = user.uid;
-        console.log('>>>on auth state change>>>', user.email);
+        // console.log('>>>on auth state change>>>', user.email);
         setUserName({ uid, email: user.email });
         setIsLoggedIn(true);
         navigate('/');
@@ -43,6 +45,7 @@ const Header = () => {
         setIsLoggedIn(false);
       }
     });
+
     // eslint-disable-next-line
   }, []);
 
@@ -60,6 +63,7 @@ const Header = () => {
         <div className="logo">
           <Link to="/">RM-Games</Link>
         </div>
+        <p className="header-username">{displayUserName}</p>
         <div className="hamburger" onClick={toggleMenu}>
           <span className="bar"></span>
           <span className="bar"></span>
@@ -70,8 +74,8 @@ const Header = () => {
             Home
           </Link>
           {/* <Link to="/games" onClick={toggleMenu}>
-            {lang.gameButton}
-          </Link> */}
+              {lang.gameButton}
+            </Link> */}
           <Link to="/records" onClick={toggleMenu}>
             {lang.records}
           </Link>
@@ -83,7 +87,7 @@ const Header = () => {
                 Login
               </Link>
               <Link to="/signup" onClick={toggleMenu}>
-                Sign Up
+                {lang.signUp}
               </Link>
             </>
           )}

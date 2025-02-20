@@ -5,7 +5,6 @@ import { HiOutlineRefresh } from 'react-icons/hi';
 import Keyboard from '../../Keyboard/keyboard';
 import InstructionModal from './InstructionModal/InstructionModal';
 import { IoIosHelpCircleOutline } from 'react-icons/io';
-import WinLose from '../services/winLose';
 
 const Wordle = () => {
   const [solution, setSolution] = useState(''); // The secret word
@@ -14,12 +13,13 @@ const Wordle = () => {
   const [isGameOver, setIsGameOver] = useState(false); // If the game is over
   const [msg, setMsg] = useState('');
   const [isError, setIsError] = useState(Array(6).fill(false)); // Track errors for each line
-  const [testMode, setTestMode] = useState(true); // Enable or disable test mode
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [testMode, setTestMode] = useState(false); // Enable or disable test mode
 
   const { selectedLanguage, languageData, languages } = Ctx(); // Get language and words from context
   const { selectedWords } = languageData; // The word list
   const { lang } = languages[selectedLanguage];
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   // Random word picker
   const randomWord = () => {
     if (selectedWords && selectedWords.length > 0) {
@@ -70,8 +70,8 @@ const Wordle = () => {
         setMsg(
           <>
             <span>{lang.gameOverText}</span>
-            <br />
-            <span style={{ color: 'red' }}>{solution}</span>
+
+            <span style={{ color: 'red' }}> [{solution.toUpperCase()}]</span>
           </>
         ); //`${lang.gameOverText}\n ${solution}.`
       }
@@ -141,10 +141,10 @@ const Wordle = () => {
               }}
             >
               <div className="">
-                <WinLose game="wordle" win="true" />
+                {/* <WinLose game="wordle" win="true" /> */}
               </div>
               <div className="">
-                <WinLose game="wordle" lose="true" />
+                {/* <WinLose game="wordle" lose="true" /> */}
               </div>
             </div>
             <div className="wordle-refresh-btn">
@@ -174,7 +174,7 @@ const Wordle = () => {
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <input type="checkbox" onChange={() => setTestMode(!testMode)} />
-            Test Mode(ignore our wordlist)
+            Hard Mode
           </div>
         </div>
         <div

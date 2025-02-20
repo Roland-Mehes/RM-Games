@@ -1,9 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
+import { writeUserData } from '../../../../fbServices/fbDB';
+import { Ctx } from '../../../../context/LanguageContext';
 
 export const useHangmanGame = (wordToGuess, setUserStats) => {
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [isWinner, setIsWinner] = useState(false);
   const [isLoser, setIsLoser] = useState(false);
+  const { userName } = Ctx();
 
   const inCorrectLetters = guessedLetters.filter(
     (letter) => wordToGuess && !wordToGuess.includes(letter)
@@ -35,19 +38,26 @@ export const useHangmanGame = (wordToGuess, setUserStats) => {
 
     if (isGameWinner && !isWinner) {
       setIsWinner(true);
-      setUserStats((prevStats) => ({
-        ...prevStats,
-        win: prevStats.win + 1,
-      }));
+      setUserStats((prevStats) => {
+        if (userName) {
+          const newStats = { ...prevStats, win: prevStats.win + 1 };
+
+          writeUserData(userName.uid, { hangman: newStats }); // Közvetlen mentés Firebase-be
+          return newStats;
+        }
+      });
     }
 
     if (isGameLoser && !isLoser) {
       setIsLoser(true);
-      setUserStats((prevStats) => ({
-        ...prevStats,
-        lose: prevStats.lose + 1,
-      }));
-    }
+      setUserStats((prevStats) => {
+        if (userName) {
+          const newStats = { ...prevStats, lose: prevStats.lose + 1 };
+          writeUserData(userName.uid, { hangman: newStats }); // Közvetlen mentés Firebase-be
+          return newStats;
+        }
+      });
+    } // eslint-disable-next-line
   }, [
     guessedLetters,
     wordToGuess,

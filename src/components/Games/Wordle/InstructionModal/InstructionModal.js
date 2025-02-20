@@ -7,7 +7,6 @@ const InstructionModal = ({ toggleModalProp }) => {
   return (
     <div className={styles.modal}>
       <div className={styles['modal-content']}>
-        {/* Bezáró gomb most a modal-content részén belül van */}
         <div className={styles['modal-close-button']} onClick={toggleModalProp}>
           X
         </div>

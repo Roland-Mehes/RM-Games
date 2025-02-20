@@ -5,6 +5,7 @@ export const webLang = {
   gameButton: 'Jocuri',
   LogoutButton: 'Deconectare',
   records: 'Recorduri',
+  signUp: 'SignUp',
 
   // text for the Hero section
   heroTextHeader: 'Joacă-te cu jocurile tale logice preferate!',
@@ -43,7 +44,8 @@ export const webLang = {
   },
 
   //Common game Text
-  gameOverText: 'Încearcă din nou',
+  hangmanGuessTheWord: 'Giceste cuvântul',
+  hangmanWin: 'Congratulation 🏆',
 
   // text for Hangman Modal
   hangmanRules: {
@@ -56,6 +58,10 @@ export const webLang = {
       '🏆 Dacă ghicești cuvântul înainte ca figura să fie completă, ai câștigat!',
     ],
   },
+
+  gameOverText: 'Incearcă din nou 😢',
+  scoreMsgWin: 'Câștiguri',
+  scoreMsgLose: 'Pierzeri',
 };
 
 export const roKeyboard = [

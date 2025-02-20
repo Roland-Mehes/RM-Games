@@ -1,29 +1,31 @@
-import './Hangman.css';
+import '../components/Games/Hangman/Hangman.css';
 import { useState, useEffect } from 'react';
-import { Ctx } from '../../../context/LanguageContext';
+import { Ctx } from '../context/LanguageContext';
 import { IoIosHelpCircleOutline } from 'react-icons/io';
 import { HiOutlineRefresh } from 'react-icons/hi';
-import HangmanBodyDraw from './HangmanBodyDraw';
-import HangmanWord from './HangmanWord';
-import HangmanKeyboard from './HangmanKeyboard';
-import HangmanModal from './InstructionModal/HangmanModal';
-import WinLose from '../services/winLose';
-import useFirebase from './customHooks/useFirebase';
-import { useRandomWordGenerator } from './customHooks/useRandomWordGenerator';
-import { useHangmanGame } from './customHooks/useHangmanGame';
+import HangmanBodyDraw from '../components/Games/Hangman/HangmanBodyDraw';
+import HangmanWord from '../components/Games/Hangman/HangmanWord';
+import HangmanKeyboard from '../components/Games/Hangman/HangmanKeyboard';
+import HangmanModal from '../components/Games/Hangman/InstructionModal/HangmanModal';
+import WinLose from '../components/Games/services/winLose';
+import useFirebase from '../components/Games/Hangman/customHooks/useFirebase';
+import { useRandomWordGenerator } from '../components/Games/Hangman/customHooks/useRandomWordGenerator';
+import { useHangmanGame } from '../components/Games/Hangman/customHooks/useHangmanGame';
+import useFireworks from '../components/customHooks/useFireworks';
 
 function Hangman() {
-  const { languageData, isLoggedIn, userName } = Ctx();
+  const { languageData, isLoggedIn, userName, languages, selectedLanguage } =
+    Ctx();
   const { selectedWords } = languageData;
   const randomWord = useRandomWordGenerator();
 
   const [wordToGuess, setWordToGuess] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { lang } = languages[selectedLanguage];
   const { userStats, setUserStats } = useFirebase(userName, {
     win: 0,
     lose: 0,
   });
-
   const {
     guessedLetters,
     isWinner,
@@ -31,6 +33,8 @@ function Hangman() {
     addGuessedLetter,
     inCorrectLetters,
   } = useHangmanGame(wordToGuess, setUserStats);
+
+  useFireworks(isWinner);
 
   // Restart the game with a new word
   useEffect(() => {
@@ -55,8 +59,16 @@ function Hangman() {
             {isLoggedIn && (
               <WinLose game="hangman" win="true" userStats={userStats} />
             )}
-            {isWinner && 'WINNER - Refresh to try again '}
-            {isLoser && 'Nice Try '}
+            {isWinner && (
+              <h6 style={{ fontFamily: `'Risque',serif` }}>
+                {lang.hangmanWin}
+              </h6>
+            )}
+            {isLoser && (
+              <h6 style={{ fontFamily: `'Risque',serif` }}>
+                {lang.gameOverText}
+              </h6>
+            )}
             {isLoggedIn && (
               <WinLose game="hangman" lose="true" userStats={userStats} />
             )}

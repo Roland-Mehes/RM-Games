@@ -24,6 +24,7 @@ export const LanguageProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState(null);
   const [languageData, setLanguageData] = useState({});
+  const { currentGame, setCurrentGame } = useState('');
 
   const languages = {
     English: { data: enData, lang: enLang, keyboard: enKeyboard },
@@ -68,6 +69,8 @@ export const LanguageProvider = ({ children }) => {
     setUserName,
     languages,
     languageData,
+    currentGame,
+    setCurrentGame,
   };
 
   return (

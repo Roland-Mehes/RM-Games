@@ -20,14 +20,14 @@ const InstructionModal = ({ toggleModalProp }) => {
             viewBox="0 0 200 250"
             xmlns="http://www.w3.org/2000/svg"
           >
-            {/* <!-- Akasztófa alap --> */}
+            {/* Hangman */}
             <line
               x1="20"
               y1="230"
               x2="120"
               y2="230"
               stroke="black"
-              stroke-width="5"
+              strokeWidth="5"
             />
             <line
               x1="70"
@@ -35,7 +35,7 @@ const InstructionModal = ({ toggleModalProp }) => {
               x2="70"
               y2="50"
               stroke="black"
-              stroke-width="5"
+              strokeWidth="5"
             />
             <line
               x1="70"
@@ -43,7 +43,7 @@ const InstructionModal = ({ toggleModalProp }) => {
               x2="150"
               y2="50"
               stroke="black"
-              stroke-width="5"
+              strokeWidth="5"
             />
             <line
               x1="150"
@@ -51,17 +51,17 @@ const InstructionModal = ({ toggleModalProp }) => {
               x2="150"
               y2="80"
               stroke="black"
-              stroke-width="3"
+              strokeWidth="3"
             />
 
-            {/* <!-- Betűhelyek (5 vonal) --> */}
+            {/* <!-- Letterposition (5 underline) --> */}
             <line
               x1="30"
               y1="250"
               x2="50"
               y2="250"
               stroke="black"
-              stroke-width="3"
+              strokeWidth="3"
             />
             <line
               x1="60"
@@ -69,7 +69,7 @@ const InstructionModal = ({ toggleModalProp }) => {
               x2="80"
               y2="250"
               stroke="black"
-              stroke-width="3"
+              strokeWidth="3"
             />
             <line
               x1="90"
@@ -77,7 +77,7 @@ const InstructionModal = ({ toggleModalProp }) => {
               x2="110"
               y2="250"
               stroke="black"
-              stroke-width="3"
+              strokeWidth="3"
             />
             <line
               x1="120"
@@ -85,7 +85,7 @@ const InstructionModal = ({ toggleModalProp }) => {
               x2="140"
               y2="250"
               stroke="black"
-              stroke-width="3"
+              strokeWidth="3"
             />
             <line
               x1="150"
@@ -93,7 +93,7 @@ const InstructionModal = ({ toggleModalProp }) => {
               x2="170"
               y2="250"
               stroke="black"
-              stroke-width="3"
+              strokeWidth="3"
             />
           </svg>
         </p>

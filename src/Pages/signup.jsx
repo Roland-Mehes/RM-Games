@@ -2,8 +2,14 @@ import { signup } from '../fbServices/fbAuth';
 import styles from './Styles/auth.module.css';
 import { writeUserData } from '../fbServices/fbDB';
 import { Timestamp } from 'firebase/firestore';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Ctx } from '../context/LanguageContext';
 
 const Signup = () => {
+  const [warningMSG, setWarningMSG] = useState();
+  const { setUserName } = Ctx();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -12,7 +18,7 @@ const Signup = () => {
     const psw = formData.get('psw');
 
     if (psw.length < 6) {
-      alert('Password must be at least 6 characters long.');
+      setWarningMSG('Password must be at least 6 characters long.');
       return;
     }
 
@@ -34,31 +40,50 @@ const Signup = () => {
         },
       });
 
-      console.log('User registered and data saved:', user);
+      setUserName({ uid: user.uid, email: user.email, username });
+
+      setWarningMSG('User registered and data saved:', user);
     } catch (error) {
-      alert('Signup failed: ' + error.message);
+      setWarningMSG('Signup failed: ' + error.message);
     }
   };
 
   return (
     <div className={styles['login-container']}>
       <form onSubmit={handleSubmit}>
-        <input type="email" name="email" placeholder="Email" />
+        <h3 className={styles.title}>Sign Up</h3>
+        <h5 className={styles.warningMSG}>{warningMSG}</h5>
+        <input
+          type="email"
+          autoComplete="email"
+          name="email"
+          placeholder="Type Your Email"
+          required
+        />
         <input
           type="text"
           name="username"
           placeholder=" Username"
           autoComplete="username"
+          minLength={4}
+          required
         />
         <input
           type="password"
           name="psw"
-          placeholder="Password"
           autoComplete="current-password"
+          placeholder="Password"
+          required
+          // minLength={6}
         />
         <button type="submit" style={{ alignSelf: 'center' }}>
           SignUp
         </button>
+        <div style={{ margin: '.5rem auto 0', display: 'flex', width: '100%' }}>
+          <h5 style={{ margin: 'auto' }}>
+            Already have account? <Link to="../login">Login</Link>
+          </h5>
+        </div>
       </form>
     </div>
   );

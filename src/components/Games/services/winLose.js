@@ -1,21 +1,25 @@
 import { useState, useEffect } from 'react';
 import style from './winLose.module.css';
+import { Ctx } from '../../../context/LanguageContext';
 
 const WinLose = ({ game, win, lose, userStats }) => {
   const [scoreMSG, setScoreMSG] = useState(null);
   const [score, setScore] = useState(null);
 
+  const { selectedLanguage, languages } = Ctx();
+  const { lang } = languages[selectedLanguage];
+
   useEffect(() => {
     if (userStats) {
       if (win) {
         setScore(userStats?.win);
-        setScoreMSG('WINS');
+        setScoreMSG(lang.scoreMsgWin);
       } else if (lose) {
         setScore(userStats?.lose);
-        setScoreMSG('LOSSES');
+        setScoreMSG(lang.scoreMsgLose);
       }
     }
-  }, [userStats, win, lose]);
+  }, [userStats, win, lose, lang]);
 
   if (score === null) {
     return <div className={style['scoreMSG']}>Loading...</div>;

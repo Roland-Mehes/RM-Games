@@ -2,6 +2,7 @@ import './GamesSection.css';
 import React from 'react';
 import { Ctx } from '../../context/LanguageContext';
 import { Link } from 'react-router-dom';
+import { FaGooglePlay } from 'react-icons/fa';
 
 const GamesSection = () => {
   const { languageData } = Ctx();
@@ -18,6 +19,15 @@ const GamesSection = () => {
           imgHeight="2rem"
           // description=""
           link="/Wordle"
+        />
+        <GameCard
+          title="Hangman"
+          imgSrc={'./img/hangman.png'}
+          imgWidth="70px"
+          imgHeight="70px"
+          // description=""
+          link="/Hangman"
+          BtnDisabled={false}
         />
         <GameCard
           title="Sudoku"
@@ -37,15 +47,6 @@ const GamesSection = () => {
           link="/memory"
           BtnDisabled={true}
         />
-        <GameCard
-          title="Hangman"
-          imgSrc={'./img/hangman.png'}
-          imgWidth="70px"
-          imgHeight="70px"
-          // description=""
-          link="/Hangman"
-          BtnDisabled={false}
-        />
       </div>
     </section>
   );
@@ -60,9 +61,6 @@ const GameCard = ({
   imgHeight,
   BtnDisabled,
 }) => {
-  const { languageData } = Ctx();
-  const { playBtn } = languageData;
-
   return (
     <div className="game-card">
       <h3>{title}</h3>
@@ -76,7 +74,7 @@ const GameCard = ({
         to={BtnDisabled ? '#' : link}
         className={BtnDisabled ? 'play-button disabled' : 'play-button'}
       >
-        {playBtn}
+        <FaGooglePlay />
       </Link>
     </div>
   );

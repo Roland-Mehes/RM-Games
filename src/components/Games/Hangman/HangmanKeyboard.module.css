@@ -41,16 +41,32 @@
   background-color: rgb(55, 28, 71);
 }
 
-@media (max-width: 590px) {
+@media (max-width: 370px) {
   .hangmanBtn {
-    padding: 10px 8px;
+    padding: 1px 1px !important;
     font-size: 10px;
     border: 2px solid black;
+  }
+}
+
+@media (max-width: 700px) {
+  .hangmanBtn {
+    padding: 8px 8px !important;
+    font-size: 12px !important;
+    border: 1px solid black;
   }
 }
 
 @media (min-height: 880px) {
   .hangmanBtn {
     padding: 1rem 1.4rem;
+  }
+}
+
+@media (max-width: 905px) {
+  .hangmanBtn {
+    padding: 15px 15px;
+    font-size: 10px;
+    border: 2px solid black;
   }
 }

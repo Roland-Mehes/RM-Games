@@ -5,6 +5,7 @@ export const webLang = {
   gameButton: 'Games',
   LogoutButton: 'Logout',
   records: 'Records',
+  signUp: 'Regisztrálás',
 
   // text for the Hero section
   heroTextHeader: 'Play your favorite logic games!',
@@ -42,9 +43,14 @@ export const webLang = {
   },
 
   //Common game Text
-  gameOverText: 'Try Again',
+  gameOverText: 'Try Again 😢',
+  scoreMsgWin: 'Wins',
+  scoreMsgLose: 'Losses',
 
   // text for Hangman Modal
+  hangmanGuessTheWord: 'Guess the Word',
+  hangmanWin: 'Congratulation 🏆',
+
   hangmanRules: {
     title: '🪓 Hangman Rules',
     description:

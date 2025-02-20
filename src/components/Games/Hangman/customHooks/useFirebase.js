@@ -32,9 +32,10 @@ const useFirebase = (userName, localStats, isWinner, isLoser) => {
     if (isWinner || isLoser) {
       updateUserStats();
     }
-  }, [isWinner, isLoser, userName, userStats]);
+    // eslint-disable-next-line
+  }, [isWinner, isLoser, userName]); //
 
-  return { userStats, setUserStats };
+  return { userStats, setUserStats, userName };
 };
 
 export default useFirebase;

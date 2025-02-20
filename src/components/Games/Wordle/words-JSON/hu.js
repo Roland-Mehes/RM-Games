@@ -5,6 +5,7 @@ export const webLang = {
   gameButton: 'Játékok',
   LogoutButton: 'Kijelentkezés',
   records: 'Rekordok',
+  signUp: 'SignUp',
 
   // text for the Hero section
   heroTextHeader: 'Játssz a kedvenc logikai játékaiddal!',
@@ -41,10 +42,10 @@ export const webLang = {
     lose: 'WORLD - Ha hibát követünk el, piros hiba animációval értesít minket a játék.',
   },
 
-  //Common game Text
-  gameOverText: 'Próbáld újra',
-
   // text for Hangman Modal
+  hangmanGuessTheWord: 'Találd ki a szót',
+  hangmanWin: 'Gratulálok 🏆',
+
   hangmanRules: {
     title: '🪓 Hangman szabályai',
     description:
@@ -55,6 +56,11 @@ export const webLang = {
       '🏆 Ha kitalálod a szót, mielőtt a figura elkészül, nyertél!',
     ],
   },
+
+  //Common game Text
+  gameOverText: 'Próbáld újra 😢',
+  scoreMsgWin: 'Győzelmek',
+  scoreMsgLose: 'Vereségek',
 };
 
 export const huKeyboard = [
