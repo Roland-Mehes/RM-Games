@@ -9,20 +9,20 @@ import './header.css';
 import { useHandleDisplayUserName } from '../customHooks/useFetchUserName';
 
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const displayUserName = useHandleDisplayUserName();
+
   const {
     selectedLanguage,
     setSelectedLanguage,
+    languages,
     isLoggedIn,
     setIsLoggedIn,
-    languages,
     setUserName,
   } = Ctx();
 
   const { lang } = languages[selectedLanguage];
-  const navigate = useNavigate();
-
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const displayUserName = useHandleDisplayUserName();
 
   const handleLanguageChange = (e) => {
     setSelectedLanguage(e.target.value);

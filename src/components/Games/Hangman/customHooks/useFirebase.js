@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { writeUserData, readUserData } from '../../../../fbServices/fbDB';
 
-const useFirebase = (userName, localStats, isWinner, isLoser) => {
+const useFirebase = (userName, localStats, gameName, isWinner, isLoser) => {
   const [userStats, setUserStats] = useState(localStats);
 
   // Fetch user stats from Firebase
@@ -10,8 +10,8 @@ const useFirebase = (userName, localStats, isWinner, isLoser) => {
       if (userName?.uid) {
         const res = await readUserData(userName.uid);
         setUserStats({
-          win: res?.hangman?.win || 0,
-          lose: res?.hangman?.lose || 0,
+          win: res?.[gameName]?.win || 0,
+          lose: res?.[gameName]?.lose || 0,
         });
       }
     };
@@ -19,13 +19,17 @@ const useFirebase = (userName, localStats, isWinner, isLoser) => {
     if (userName?.uid) {
       fetchUserStats();
     }
-  }, [userName]);
+  }, [userName, gameName]);
 
   // Write to Firebase when the game ends
   useEffect(() => {
     const updateUserStats = async () => {
-      if (userName?.uid && (isWinner || isLoser)) {
-        await writeUserData(userName.uid, { hangman: userStats });
+      try {
+        if (userName?.uid && (isWinner || isLoser)) {
+          await writeUserData(userName.uid, { [gameName]: userStats });
+        }
+      } catch (error) {
+        console.error('Error writing user data: ', error);
       }
     };
 

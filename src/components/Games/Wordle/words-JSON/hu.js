@@ -5,7 +5,7 @@ export const webLang = {
   gameButton: 'Játékok',
   LogoutButton: 'Kijelentkezés',
   records: 'Rekordok',
-  signUp: 'SignUp',
+  signUp: 'Regisztrálás',
 
   // text for the Hero section
   heroTextHeader: 'Játssz a kedvenc logikai játékaiddal!',

@@ -22,10 +22,14 @@ function Hangman() {
   const [wordToGuess, setWordToGuess] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { lang } = languages[selectedLanguage];
-  const { userStats, setUserStats } = useFirebase(userName, {
-    win: 0,
-    lose: 0,
-  });
+  const { userStats, setUserStats } = useFirebase(
+    userName,
+    {
+      win: 0,
+      lose: 0,
+    },
+    'hangman'
+  );
   const {
     guessedLetters,
     isWinner,

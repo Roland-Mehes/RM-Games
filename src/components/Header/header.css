@@ -28,6 +28,7 @@
   border: 5px dashed rgba(80, 250, 123, 0.5);
   border-radius: 5px 35px 5px 35px;
   padding: 0 14px 0 14px;
+  white-space: nowrap;
 }
 
 .header-username {
@@ -94,6 +95,7 @@
 }
 
 /* Responsive Design */
+
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
@@ -118,5 +120,17 @@
   .language-selector {
     max-width: 200px;
     margin: auto;
+  }
+}
+
+@media (max-width: 460px) {
+  .header {
+    padding: 0 1rem 0 0;
+  }
+
+  .logo a {
+    font-size: 1rem;
+    border: 3px dashed rgba(80, 250, 123, 0.5);
+    line-height: 2;
   }
 }

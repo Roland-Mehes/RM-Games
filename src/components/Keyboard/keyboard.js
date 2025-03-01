@@ -1,27 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Ctx } from '../../context/LanguageContext';
 import './Keyboard.css';
 
-const Keyboard = ({ keyPressed }) => {
+const Keyboard = () => {
   const { languageData } = Ctx();
-  const [keyboard, setKeyboard] = useState(languageData.keyboard || []);
+  const [keyboard, setKeyboard] = useState(languageData.keyboard);
 
-  // Frissítsük a billentyűzetet, ha a nyelv változik
   useEffect(() => {
-    setKeyboard(languageData.keyboard || []);
+    setKeyboard(languageData.keyboard);
   }, [languageData]);
 
   const handleKeyPress = (key) => {
-    let event;
+    const keyMap = {
+      enter: 'Enter',
+      backspace: 'Backspace',
+    };
 
-    if (key === 'enter') {
-      event = { key: 'Enter' };
-    } else if (key === 'backspace') {
-      event = { key: 'Backspace' };
-    } else {
-      event = { key };
-    }
-
+    const event = { key: keyMap[key] || key };
     window.dispatchEvent(new KeyboardEvent('keydown', event));
   };
 
@@ -31,9 +26,9 @@ const Keyboard = ({ keyPressed }) => {
         <div key={rowIndex} className="keyboard-row">
           {row.map((key, keyIdx) => (
             <button
+              key={keyIdx}
               onClick={() => handleKeyPress(key)}
               className="keyboard-key"
-              key={keyIdx}
             >
               {key === 'enter' ? 'Enter' : key === 'backspace' ? '←' : key}
             </button>
