@@ -5,10 +5,15 @@ import { Timestamp } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { Ctx } from '../context/LanguageContext';
+import { TfiEye } from 'react-icons/tfi';
+import { RxEyeClosed } from 'react-icons/rx';
+import { usePasswordVisible } from '../components/customHooks/validator';
 
 const Signup = () => {
   const [warningMSG, setWarningMSG] = useState();
-  const { setUserName } = Ctx();
+  const { setUserName, languages, selectedLanguage } = Ctx();
+  const { lang } = languages[selectedLanguage];
+  const { isPasswordVisible, togglePasswordVisibility } = usePasswordVisible();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,13 +56,13 @@ const Signup = () => {
   return (
     <div className={styles['login-container']}>
       <form onSubmit={handleSubmit}>
-        <h3 className={styles.title}>Sign Up</h3>
+        <h3 className={styles.title}>{lang.signUpHeader}</h3>
         <h5 className={styles.warningMSG}>{warningMSG}</h5>
         <input
           type="email"
           autoComplete="email"
           name="email"
-          placeholder="Type Your Email"
+          placeholder="myEmail@email.com"
           required
         />
         <input
@@ -68,20 +73,33 @@ const Signup = () => {
           minLength={4}
           required
         />
-        <input
-          type="password"
-          name="psw"
-          autoComplete="current-password"
-          placeholder="Password"
-          required
-          // minLength={6}
-        />
+        <div className={styles['password-container']}>
+          <input
+            type={isPasswordVisible ? 'text' : 'password'}
+            name="psw"
+            autoComplete="curent-password"
+            placeholder="******"
+            required
+            minLength={6}
+          />
+          {!isPasswordVisible ? (
+            <TfiEye
+              className={styles['password-icon']}
+              onClick={() => togglePasswordVisibility()}
+            />
+          ) : (
+            <RxEyeClosed
+              className={styles['password-icon']}
+              onClick={() => togglePasswordVisibility()}
+            />
+          )}
+        </div>
         <button type="submit" style={{ alignSelf: 'center' }}>
-          SignUp
+          {lang.signUpButton}
         </button>
         <div style={{ margin: '.5rem auto 0', display: 'flex', width: '100%' }}>
           <h5 style={{ margin: 'auto' }}>
-            Already have account? <Link to="../login">Login</Link>
+            {lang.alreadySignedUp} <Link to="../login">{lang.hereLink}</Link>
           </h5>
         </div>
       </form>

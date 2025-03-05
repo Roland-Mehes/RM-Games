@@ -22,7 +22,26 @@ export const webLang = {
     'Dezvoltă gândirea logică',
     'Provocări în fiecare zi',
     'Excelent pentru distracție și exerciții pentru minte',
-  ],
+  ], // text for login and register
+
+  loginHeader: 'Autentificare',
+  rememberMe: 'Ține-mă minte',
+  login: 'Autentificare',
+  forgetPassword: 'Ai uitat parola?',
+  dontHaveAccount: 'Nu ai un cont? Hai să facem unul ',
+  hereLink: 'aici.',
+  loginErrorMSG: 'Email sau parolă incorectă',
+
+  // text for sign Up / Register
+
+  signUpHeader: 'Înregistrare',
+  signUpButton: 'Înregistrare',
+  alreadySignedUp: 'Ai deja un cont? Autentifică-te ',
+
+  //Record Page
+
+  recordHeader: 'Statistici',
+  recordSelect: 'Selectează jocul',
 
   // text for Wordle Game
   wordleGuessTheWord: 'Găsește cuvântul!',
@@ -61,7 +80,7 @@ export const webLang = {
 
   gameOverText: 'Incearcă din nou 😢',
   scoreMsgWin: 'Câștiguri',
-  scoreMsgLose: 'Pierzeri',
+  scoreMsgLose: 'Pierderi',
 };
 
 export const roKeyboard = [

@@ -4,6 +4,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import styles from './records.module.css';
 import { IoPlayForward } from 'react-icons/io5';
 import { IoPlayBackSharp } from 'react-icons/io5';
+import { Ctx } from '../../context/LanguageContext';
 
 const Records = () => {
   const [selectedGame, setSelectedGame] = useState('');
@@ -12,6 +13,9 @@ const Records = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [nextPage, setNextPage] = useState(5);
   const [sortConfig, setSortConfig] = useState({ key: '', direction: 'asc' });
+
+  const { languages, selectedLanguage } = Ctx();
+  const { lang } = languages[selectedLanguage];
 
   // fecthcing the game names
   useEffect(() => {
@@ -91,7 +95,7 @@ const Records = () => {
           marginBottom: '1rem',
         }}
       >
-        Game Statistics
+        {lang.recordHeader}
       </h2>
 
       {/* Dropdown menu */}
@@ -100,7 +104,7 @@ const Records = () => {
         value={selectedGame}
         className={styles['select']}
       >
-        <option value="">Select Game</option>
+        <option value="">{lang.recordSelect}</option>
         {games.map((game) => (
           <option key={game} value={game}>
             {game.charAt(0).toUpperCase() + game.slice(1)}
@@ -118,8 +122,12 @@ const Records = () => {
             <thead>
               <tr>
                 <th>Username</th>
-                <th onClick={() => sort('win')}>Wins</th>
-                <th onClick={() => sort('lose')}>Losses</th>
+                <th style={{ cursor: 'pointer' }} onClick={() => sort('win')}>
+                  {lang.scoreMsgWin}
+                </th>
+                <th style={{ cursor: 'pointer' }} onClick={() => sort('lose')}>
+                  {lang.scoreMsgLose}
+                </th>
               </tr>
             </thead>
             <tbody>

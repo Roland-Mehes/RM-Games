@@ -24,6 +24,26 @@ export const webLang = {
     'Kiváló a szórakozásra és az agytornáztatásra',
   ],
 
+  // text for login and register
+  loginHeader: 'Bejelentkezés',
+  rememberMe: 'Emlékezz rám',
+  login: 'Bejelentkezés',
+  forgetPassword: 'Elfelejtetted a jelszót?',
+  dontHaveAccount: 'Nincs fiókod? Készítsünk egyet ',
+  hereLink: 'itt.',
+  loginErrorMSG: 'Helytelen email vagy jelszó',
+
+  // text for sign Up / Register
+
+  signUpHeader: 'Regisztráció',
+  signUpButton: 'Regisztráció',
+  alreadySignedUp: 'Már van fiókod? Jelentkezz be ',
+
+  //Record Page
+
+  recordHeader: 'Statisztikák',
+  recordSelect: 'Játék kiválasztása',
+
   // text for Wordle Game
   wordleGuessTheWord: 'Találd ki a szót',
   wordleWordIsNotInDatabase: 'Ez a szó nincs a szavaink listájában.',

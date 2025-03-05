@@ -65,7 +65,7 @@ button[type='submit'] {
 }
 
 button:hover {
-  background-color: #50fa7b;
+  background-color: #8b98c3;
   transform: scale(1.05);
 }
 
@@ -112,7 +112,7 @@ input {
 }
 
 input::placeholder {
-  color: #fff;
+  color: rgba(255, 255, 255, 0.3);
 }
 
 input:focus {

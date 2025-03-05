@@ -7,6 +7,7 @@ import InstructionModal from './InstructionModal/InstructionModal';
 import { IoIosHelpCircleOutline } from 'react-icons/io';
 import WinLose from '../services/winLose';
 import useFirebase from '../Hangman/customHooks/useFirebase';
+import useFireworks from '../../customHooks/useFireworks';
 
 const Wordle = () => {
   const [solution, setSolution] = useState('');
@@ -33,6 +34,8 @@ const Wordle = () => {
     isWinner,
     isLoser
   );
+
+  useFireworks(isWinner);
 
   // Random szó kiválasztása
   const randomWord = () =>

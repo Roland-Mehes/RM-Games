@@ -8,7 +8,8 @@ import { TfiEye } from 'react-icons/tfi';
 import { RxEyeClosed } from 'react-icons/rx';
 
 const Login = () => {
-  const { setIsLoggedIn } = Ctx();
+  const { setIsLoggedIn, languages, selectedLanguage } = Ctx();
+  const { lang } = languages[selectedLanguage];
 
   const [warningMSG, setWarningMSG] = useState('');
   const formRef = useRef();
@@ -28,7 +29,7 @@ const Login = () => {
           setIsLoggedIn(true);
         })
         .catch((error) => {
-          setWarningMSG('Email or pass is wrong');
+          setWarningMSG(lang.loginErrorMSG);
           return error;
         });
     }
@@ -44,13 +45,13 @@ const Login = () => {
   return (
     <div className={styles['login-container']}>
       <form onSubmit={handleSubmit} ref={formRef}>
-        <h3 className={styles.title}>Login</h3>
+        <h3 className={styles.title}>{lang.loginHeader}</h3>
         <h5 className={styles.warningMSG}>{warningMSG}</h5>
         <input
           type="email"
           autoComplete="email"
           name="email"
-          placeholder="Type Your Email"
+          placeholder="myEmail@email.com"
           required
         />
         <div className={styles['password-container']}>
@@ -58,7 +59,7 @@ const Login = () => {
             type={isPasswordVisible ? 'text' : 'password'}
             name="psw"
             autoComplete="curent-password"
-            placeholder="Type Your Password"
+            placeholder="******"
             required
             minLength={6}
           />
@@ -76,20 +77,21 @@ const Login = () => {
         </div>
         <div className={styles['remember-me']}>
           <input type="checkbox" ref={persisitenceRef} />
-          <label>Remember Me</label>
+          <label>{lang.rememberMe}</label>
         </div>
         <div className={styles.btnContainer}>
-          <button type="submit">Login</button>
+          <button type="submit">{lang.login}</button>
           <button
             onClick={handleForgetPsw}
             className={styles['btn-forget-psw']}
           >
-            Forget password
+            {lang.forgetPassword}
           </button>
         </div>
         <div style={{ margin: '.5rem auto 0', display: 'flex', width: '100%' }}>
           <h5 style={{ margin: 'auto' }}>
-            Dont have Account? Lets make one <Link to="../signup">here.</Link>
+            {lang.dontHaveAccount}{' '}
+            <Link to="../signup">{lang.dontHaveAccountLink}</Link>
           </h5>
         </div>
       </form>

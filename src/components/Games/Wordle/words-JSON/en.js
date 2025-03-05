@@ -24,6 +24,27 @@ export const webLang = {
     'Excellent for fun and brain exercise',
   ],
 
+  // text for login
+
+  loginHeader: 'Login',
+  rememberMe: 'Remember Me',
+  login: 'Login',
+  forgetPassword: 'Forget Password',
+  dontHaveAccount: 'Dont have Account? Lets make one ',
+  hereLink: 'here.',
+  loginErrorMSG: 'Email or password is wrong',
+
+  // text for sign Up / Register
+
+  signUpHeader: 'Sign Up',
+  signUpButton: 'Sign Up',
+  alreadySignedUp: 'Already have account? Sign in ',
+
+  //Record Page
+
+  recordHeader: 'Statistics',
+  recordSelect: 'Select Game',
+
   // text for Wordle Game
   wordleGuessTheWord: 'Try to guess the word',
   wordleWordIsNotInDatabase: 'This word is not in our List of Words',
