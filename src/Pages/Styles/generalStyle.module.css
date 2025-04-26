@@ -1,0 +1,27 @@
+.mainContainer {
+  background-color: var(--main-color);
+  backdrop-filter: blur(35px) hue-rotate(20deg);
+  margin: 0 5rem 2rem;
+  border-radius: 20px;
+  border: 3px solid #000;
+}
+
+.contentContainer {
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+  max-width: 60vw;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 2rem auto 1rem;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  min-height: 70px;
+  align-items: center;
+}

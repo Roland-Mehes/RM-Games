@@ -46,6 +46,16 @@ const Header = () => {
       }
     });
 
+    // Make sure the hamburger menu wont open automaticly
+    const handleResize = () => {
+      if (window.innerWidth > 830) {
+        setIsMenuOpen(false); // Bezárjuk a menüt, ha visszalépünk nagyobb nézetbe
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+
     // eslint-disable-next-line
   }, []);
 
@@ -73,9 +83,9 @@ const Header = () => {
           <Link to="/" onClick={toggleMenu}>
             Home
           </Link>
-          {/* <Link to="/games" onClick={toggleMenu}>
-              {lang.gameButton}
-            </Link> */}
+          <Link to="/games" onClick={toggleMenu}>
+            {lang.gameButton}
+          </Link>
           <Link to="/records" onClick={toggleMenu}>
             {lang.records}
           </Link>

@@ -1,8 +1,7 @@
 import './GamesSection.css';
 import React from 'react';
 import { Ctx } from '../../context/LanguageContext';
-import { Link } from 'react-router-dom';
-import { FaGooglePlay } from 'react-icons/fa';
+import GameCard from '../GameCard';
 
 const GamesSection = () => {
   const { languageData } = Ctx();
@@ -29,7 +28,7 @@ const GamesSection = () => {
           link="/Hangman"
           BtnDisabled={false}
         />
-        <GameCard
+        {/* <GameCard
           title="Sudoku"
           imgSrc={'./img/sudoku.jpg'}
           imgWidth="70px"
@@ -37,8 +36,8 @@ const GamesSection = () => {
           // description=""
           link="/sudoku"
           BtnDisabled={true}
-        />
-        <GameCard
+        /> */}
+        {/* <GameCard
           title="Memory"
           imgSrc={'./img/memory-game2.png'}
           imgWidth="70px"
@@ -46,37 +45,9 @@ const GamesSection = () => {
           // description=""
           link="/memory"
           BtnDisabled={true}
-        />
+        /> */}
       </div>
     </section>
-  );
-};
-
-const GameCard = ({
-  title,
-  description,
-  link,
-  imgSrc,
-  imgWidth,
-  imgHeight,
-  BtnDisabled,
-}) => {
-  return (
-    <div className="game-card">
-      <h3>{title}</h3>
-      <img
-        src={imgSrc}
-        alt="img"
-        style={{ width: imgWidth, height: imgHeight, margin: 'auto' }}
-      ></img>
-      {/* <p>{description}</p> */}
-      <Link
-        to={BtnDisabled ? '#' : link}
-        className={BtnDisabled ? 'play-button disabled' : 'play-button'}
-      >
-        <FaGooglePlay />
-      </Link>
-    </div>
   );
 };
 

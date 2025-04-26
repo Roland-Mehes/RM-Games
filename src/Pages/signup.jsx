@@ -59,6 +59,7 @@ const Signup = () => {
         <h3 className={styles.title}>{lang.signUpHeader}</h3>
         <h5 className={styles.warningMSG}>{warningMSG}</h5>
         <input
+          className={styles.customInput}
           type="email"
           autoComplete="email"
           name="email"
@@ -66,6 +67,7 @@ const Signup = () => {
           required
         />
         <input
+          className={styles.customInput}
           type="text"
           name="username"
           placeholder=" Username"
@@ -75,6 +77,7 @@ const Signup = () => {
         />
         <div className={styles['password-container']}>
           <input
+            className={styles.customInput}
             type={isPasswordVisible ? 'text' : 'password'}
             name="psw"
             autoComplete="curent-password"

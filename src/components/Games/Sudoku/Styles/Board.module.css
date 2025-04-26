@@ -1,0 +1,31 @@
+.mainContainer {
+  /* display: flex;
+  flex-direction: column; */
+}
+
+.row {
+  display: flex;
+}
+
+.collumn {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.borderLeft {
+  border-left: 3px solid black;
+}
+
+.borderRight {
+  border-right: 3px solid black;
+}
+
+.borderTop {
+  border-top: 3px solid black;
+}
+
+.borderBottom {
+  border-bottom: 3px solid black;
+}

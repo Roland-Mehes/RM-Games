@@ -42,7 +42,7 @@ function Hangman() {
 
   // Restart the game with a new word
   useEffect(() => {
-    if (selectedWords.length > 0) {
+    if (selectedWords?.length > 0) {
       setWordToGuess(randomWord());
     }
   }, [selectedWords, randomWord]);
@@ -64,12 +64,12 @@ function Hangman() {
               <WinLose game="hangman" win="true" userStats={userStats} />
             )}
             {isWinner && (
-              <h6 style={{ fontFamily: `'Risque',serif` }}>
+              <h6 style={{ fontFamily: `'Risque',serif'`, color: 'green' }}>
                 {lang.hangmanWin}
               </h6>
             )}
             {isLoser && (
-              <h6 style={{ fontFamily: `'Risque',serif` }}>
+              <h6 style={{ fontFamily: `'Risque',serif'`, color: 'red' }}>
                 {lang.gameOverText}
               </h6>
             )}

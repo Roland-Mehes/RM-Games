@@ -1,13 +1,9 @@
-:root {
-  --main-color: rgba(30, 30, 46, 0.9);
-  --second-color: rgb(40, 42, 54);
-}
-
 .main-container {
   background-color: var(--main-color);
   backdrop-filter: blur(35px) hue-rotate(20deg);
   margin: 0 5rem 2rem;
   border-radius: 20px;
+  border: 3px solid #000;
 }
 
 .hangman-container {
@@ -60,9 +56,15 @@
   transform: rotate(-40deg);
 }
 
-@media (max-width: 305px) {
+/* MEDIA QUERRY */
+
+@media (max-width: 750px) {
+  .main-container {
+    margin: 0 0 10px 0;
+  }
+
   .hangman-container {
-    min-width: 80vw;
+    min-width: 90vw;
   }
 }
 

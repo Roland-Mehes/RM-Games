@@ -9,6 +9,7 @@
   border-radius: 20px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(25px);
+  border: 3px solid #000;
 }
 
 .board {
@@ -16,7 +17,7 @@
   margin: 10px auto;
   border-radius: 10px;
   box-shadow: 1px 1px 8px 3px rgb(0, 0, 0);
-  max-width: 600px;
+  max-width: 500px;
   min-width: 300px;
   padding: 20px;
 }
@@ -60,8 +61,8 @@
 }
 
 .cell {
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   display: flex;
   justify-content: center;
   align-items: center;
