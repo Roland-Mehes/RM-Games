@@ -1,0 +1,157 @@
+:root {
+  --min-height: 300px;
+  --content-gap: 0;
+}
+
+.allGamesSection {
+  padding: 50px 20px;
+  background-color: #282a36;
+  text-align: center;
+  margin: 0 10rem 2rem;
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.allGamesSection h2 {
+  font-size: 2.2rem;
+  color: #f8f8f2;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.allGamesList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.allGameCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1e1e2e;
+  padding: 20px;
+  border-radius: 30px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  min-height: var(--min-height);
+  gap: var(--content-gap);
+  border-bottom: 1px solid #50fa7b;
+}
+
+.allGameCard:hover:after {
+  position: absolute;
+  content: 'PLAY';
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  color: #50fa7b;
+  font-size: 2rem;
+  font-weight: 800;
+  text-wrap: break-word;
+  text-shadow: 2px 2px 4px rgba(241, 5, 5, 0.7),
+    -2px -2px 4px rgba(240, 6, 6, 0.7);
+}
+
+.imageContainer {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.imageContainer img {
+  object-fit: contain;
+}
+
+.textContainer {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 10px;
+}
+
+.allGameCard h3 {
+  font-size: 1.4rem;
+  margin-top: 10px;
+  color: #50fa7b;
+  font-weight: bold;
+}
+
+.allGameCard p {
+  color: #d1d1e0;
+  letter-spacing: 1px;
+}
+
+.allGameCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+  /* border-bottom: 1px solid red; */
+}
+
+.description {
+  font-family: 'Work Sans', 'Inter', sans-serif;
+  font-size: 1rem;
+  color: #ccc;
+  margin-top: 10px;
+  line-height: 1.5;
+  max-height: 6rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.disabled {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1e1e2e;
+  padding: 20px;
+  border-radius: 30px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: not-allowed;
+  min-height: var(--min-height);
+  gap: var(--content-gap);
+  border-bottom: 1px solid #970707;
+  filter: grayscale(50%);
+  color: #777;
+}
+
+.disabled .textContainer {
+  padding-top: 10px;
+}
+
+.disabled h3 {
+  font-size: 1.4rem;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.disabled p {
+  letter-spacing: 1px;
+}
+
+.disabled:hover::after {
+  position: absolute;
+  content: 'Under Construction';
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  color: red;
+  font-size: 2rem;
+  font-weight: 800;
+  text-wrap: break-word;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), -2px -2px 4px rgba(0, 0, 0, 0.7);
+}

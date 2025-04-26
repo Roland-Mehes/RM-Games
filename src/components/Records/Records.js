@@ -121,7 +121,7 @@ const Records = () => {
             </caption>
             <thead>
               <tr>
-                <th>Username</th>
+                <th>User</th>
                 <th style={{ cursor: 'pointer' }} onClick={() => sort('win')}>
                   {lang.scoreMsgWin}
                 </th>

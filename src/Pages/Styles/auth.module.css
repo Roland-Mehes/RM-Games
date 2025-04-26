@@ -4,7 +4,9 @@
   background-color: var(--main-color);
   backdrop-filter: blur(20px);
   border: 3px solid black;
-  width: 50rem;
+  width: 100%;
+  max-width: 50rem;
+
   height: 25rem;
   border-radius: 15px;
   justify-content: space-between;
@@ -106,32 +108,43 @@ a {
   text-shadow: -2px 1px 2px #000;
 }
 
-input {
+.customInput {
   background-color: var(--main-color);
   color: #fff;
 }
 
-input::placeholder {
+.customInput::placeholder {
   color: rgba(255, 255, 255, 0.3);
 }
 
-input:focus {
+.customInput:focus {
   outline: none;
   border: 3px solid rgba(120, 30, 30, 1);
 }
 
-input:invalid {
+.customInput:invalid {
   border: 3px solid rgba(120, 30, 30, 1);
   background-color: rgba(83, 27, 27, 0.8);
 }
 
-input:focus:invalid {
+.customInput:focus:invalid {
   outline: none;
   border: 5px solid transparent;
   border: 3px solid var(--main-color);
 }
 
-input:valid {
+.customInput:valid {
   border: 3px solid green;
   background-color: var(--main-color);
+}
+
+@media (max-width: 800px) {
+  .login-container form {
+    width: 80%;
+    align-items: center;
+  }
+
+  .password-container {
+    max-width: 100%;
+  }
 }

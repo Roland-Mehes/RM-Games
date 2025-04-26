@@ -1,7 +1,7 @@
 import { wordsList } from './enWordsList';
 
 export const webLang = {
-  // text for header
+  // text for navbar
   gameButton: 'Games',
   LogoutButton: 'Logout',
   records: 'Records',
@@ -45,6 +45,16 @@ export const webLang = {
   recordHeader: 'Statistics',
   recordSelect: 'Select Game',
 
+  // All Games :
+  wordleDescription:
+    'Wordle is a fun word game where you must guess a 5-letter word within 6 tries. Each attempt gives you feedback about how close you were to the correct word.',
+
+  sudokuDescription:
+    'Sudoku is a classic logic game where you need to fill a 9x9 grid so that every row, column, and 3x3 box contains the numbers 1-9 exactly once.',
+
+  tictactoeDescription:
+    'Tic Tac Toe is a simple and engaging two-player game where the goal is to align three identical symbols (X or O) in a row, column, or diagonal.',
+
   // text for Wordle Game
   wordleGuessTheWord: 'Try to guess the word',
   wordleWordIsNotInDatabase: 'This word is not in our List of Words',
@@ -71,6 +81,8 @@ export const webLang = {
   // text for Hangman Modal
   hangmanGuessTheWord: 'Guess the Word',
   hangmanWin: 'Congratulation 🏆',
+  hangmanDescription:
+    'Hangman is a classic word-guessing game where you try to reveal a hidden word by guessing one letter at a time. Be careful: every wrong guess brings the hangman closer to completion!',
 
   hangmanRules: {
     title: '🪓 Hangman Rules',

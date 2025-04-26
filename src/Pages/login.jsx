@@ -47,15 +47,20 @@ const Login = () => {
       <form onSubmit={handleSubmit} ref={formRef}>
         <h3 className={styles.title}>{lang.loginHeader}</h3>
         <h5 className={styles.warningMSG}>{warningMSG}</h5>
-        <input
-          type="email"
-          autoComplete="email"
-          name="email"
-          placeholder="myEmail@email.com"
-          required
-        />
         <div className={styles['password-container']}>
           <input
+            className={styles.customInput}
+            type="email"
+            autoComplete="email"
+            name="email"
+            placeholder="myEmail@email.com"
+            required
+          />
+        </div>
+
+        <div className={styles['password-container']}>
+          <input
+            className={styles.customInput}
             type={isPasswordVisible ? 'text' : 'password'}
             name="psw"
             autoComplete="curent-password"
@@ -90,8 +95,8 @@ const Login = () => {
         </div>
         <div style={{ margin: '.5rem auto 0', display: 'flex', width: '100%' }}>
           <h5 style={{ margin: 'auto' }}>
-            {lang.dontHaveAccount}{' '}
-            <Link to="../signup">{lang.dontHaveAccountLink}</Link>
+            {lang.dontHaveAccount}
+            <Link to="../signup">{lang.hereLink}</Link>
           </h5>
         </div>
       </form>

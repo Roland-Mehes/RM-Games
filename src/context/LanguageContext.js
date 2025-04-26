@@ -3,17 +3,17 @@ import {
   wordleLang as enData,
   webLang as enLang,
   enKeyboard,
-} from '../components/Games/Wordle/words-JSON/en';
+} from '../locales/en';
 import {
   wordleLang as huData,
   webLang as huLang,
   huKeyboard,
-} from '../components/Games/Wordle/words-JSON/hu';
+} from '../locales/hu';
 import {
   wordleLang as roData,
   webLang as roLang,
   roKeyboard,
-} from '../components/Games/Wordle/words-JSON/ro';
+} from '../locales/ro';
 
 const LanguageContext = createContext();
 
