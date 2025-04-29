@@ -18,13 +18,22 @@ import {
 const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-  const lStore = localStorage.getItem('language') || 'English'; // just to keep selectedLanguage in one line ....
+  const lStore = localStorage.getItem('language') || 'English'; // just to keep selectedLanguage state in one line ....
 
   const [selectedLanguage, setSelectedLanguage] = useState(lStore);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState(null);
   const [languageData, setLanguageData] = useState({});
-  const { currentGame, setCurrentGame } = useState('');
+  const [currentGame, setCurrentGame] = useState('');
+
+  // This is the context that will be used in TicTacToe
+  const [TicTacToe, setTicTacToe] = useState({
+    currentPlayer: 'X',
+    boardCells: Array(9).fill(null),
+    isWinner: false,
+    gameMode: 'cpu', // cpu or player
+    player1Marker: 'O',
+  });
 
   const languages = {
     English: { data: enData, lang: enLang, keyboard: enKeyboard },
@@ -71,6 +80,8 @@ export const LanguageProvider = ({ children }) => {
     languageData,
     currentGame,
     setCurrentGame,
+    TicTacToe,
+    setTicTacToe,
   };
 
   return (

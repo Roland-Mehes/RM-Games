@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from './Styles/allGamesStyle.module.css';
-import gamesData from '../components/data/gamesData';
+import gamesData from '../data/gamesData';
 import { Ctx } from '../context/LanguageContext';
 import { useNavigate } from 'react-router-dom';
+
 const AllGames = () => {
   const { selectedLanguage, languages } = Ctx();
   const { lang } = languages[selectedLanguage];
@@ -10,7 +11,7 @@ const AllGames = () => {
   const navigate = useNavigate();
 
   const getDescription = (title) => {
-    const key = title.toLowerCase().replace(' ', '') + 'Description';
+    const key = title.toLowerCase().replaceAll(' ', '') + 'Description';
     return lang[key] || 'No description available';
   };
 

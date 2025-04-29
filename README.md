@@ -15,16 +15,15 @@ Live Demo: [https://rm-games.netlify.app/](https://rm-games.netlify.app/)
 - 🎉 Fun victory animations using `canvas-confetti`
 - 📱 Mobile-friendly (mostly responsive, still in development)
 
- ## 🌍 Multi-language Support
+## 🌍 Multi-language Support
 
 The platform currently supports **three languages**, making it accessible to a wider audience. Language selection is available directly in the UI.
 
--  English
--  Hungarian
+- English
+- Hungarian
 - Romanian
 
-     - More languages can easily be added in the future thanks to the modular structure.
-
+  - More languages can easily be added in the future thanks to the modular structure.
 
 # 🛠️ Technologies Used
 
@@ -35,12 +34,14 @@ The platform currently supports **three languages**, making it accessible to a w
 - [Netlify](https://www.netlify.com/) for deployment
 
 ## 🗂️ Current Game List
+
 - 🟩 Wordle clone
 
 - 🔤 Hangman clone
-    - (More games coming soon)
- 
+  - (More games coming soon)
+
 ## 🧪 In Progress
+
 - 🎨 UI/UX polish and mobile responsiveness improvements
 - 🕹️ More games in development
 - 🛠️ Admin panel (planned)

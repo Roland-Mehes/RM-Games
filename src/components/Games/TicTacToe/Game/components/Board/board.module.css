@@ -1,0 +1,19 @@
+.cellContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 10px;
+  justify-items: center;
+}
+
+.cell {
+  width: 120px;
+  aspect-ratio: 1;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: var(--secondary-bg-color);
+  border-bottom: 5px solid #0a1c2c;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

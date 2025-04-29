@@ -5,6 +5,7 @@ import styles from './records.module.css';
 import { IoPlayForward } from 'react-icons/io5';
 import { IoPlayBackSharp } from 'react-icons/io5';
 import { Ctx } from '../../context/LanguageContext';
+import SortIcon from './sortConfig';
 
 const Records = () => {
   const [selectedGame, setSelectedGame] = useState('');
@@ -41,6 +42,21 @@ const Records = () => {
         });
       }
     });
+
+    // Jump to the first page after changeing games
+
+    // setCurrentPage(0);
+
+    // After game select keep the previous sorting order if [sortConfig.key] is not empty
+    if (sortConfig.key) {
+      userStatsArray.sort((a, b) => {
+        if (sortConfig.direction === 'asc') {
+          return a[sortConfig.key] - b[sortConfig.key];
+        } else {
+          return b[sortConfig.key] - a[sortConfig.key];
+        }
+      });
+    }
     setUserStats(userStatsArray);
   };
 
@@ -56,7 +72,7 @@ const Records = () => {
   };
 
   const paginationIncrementer = () => {
-    if (currentPage <= (userStats.length % 5) - 1) {
+    if (nextPage < userStats.length) {
       setCurrentPage((prev) => prev + 5);
       setNextPage((prev) => prev + 5);
     }
@@ -124,9 +140,11 @@ const Records = () => {
                 <th>User</th>
                 <th style={{ cursor: 'pointer' }} onClick={() => sort('win')}>
                   {lang.scoreMsgWin}
+                  <SortIcon columnKey="win" sortConfig={sortConfig} />
                 </th>
                 <th style={{ cursor: 'pointer' }} onClick={() => sort('lose')}>
                   {lang.scoreMsgLose}
+                  <SortIcon columnKey="lose" sortConfig={sortConfig} />
                 </th>
               </tr>
             </thead>

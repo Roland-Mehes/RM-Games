@@ -1,0 +1,43 @@
+.mainContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem 2rem;
+}
+
+.scoreDisplay {
+  display: flex;
+  gap: 10px;
+  padding: 14px 25px;
+  border-radius: 15px;
+  background-color: var(--secondary-bg-color);
+  border-bottom: 3px solid #091a27;
+}
+
+.restartContainer {
+  padding: 0 30px;
+  height: 52px;
+  border-radius: 15px;
+  background-color: var(--special-color);
+  display: grid;
+  align-items: center;
+  border-bottom: 3px solid #091a27;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.restartContainer:hover {
+  background-color: #b8deff;
+}
+
+.restartContainer:active {
+  transform: scale(0.95);
+}
+
+.restartContainer svg {
+  transition: transform 0.3s ease-in-out;
+}
+
+.restartContainer:hover svg {
+  transform: rotate(60deg);
+}

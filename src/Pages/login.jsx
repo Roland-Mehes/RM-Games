@@ -25,12 +25,11 @@ const Login = () => {
       rememberMe(email, psw);
     } else {
       login(email, psw)
-        .then((res) => {
+        .then(() => {
           setIsLoggedIn(true);
         })
-        .catch((error) => {
+        .catch(() => {
           setWarningMSG(lang.loginErrorMSG);
-          return error;
         });
     }
   };
@@ -47,43 +46,49 @@ const Login = () => {
       <form onSubmit={handleSubmit} ref={formRef}>
         <h3 className={styles.title}>{lang.loginHeader}</h3>
         <h5 className={styles.warningMSG}>{warningMSG}</h5>
-        <div className={styles['password-container']}>
+
+        <div className={styles['input-wrapper']}>
           <input
             className={styles.customInput}
             type="email"
             autoComplete="email"
             name="email"
-            placeholder="myEmail@email.com"
+            placeholder=" "
             required
           />
+          <label className={styles['floating-label']}>Email</label>
         </div>
 
-        <div className={styles['password-container']}>
+        <div className={styles['input-wrapper']}>
           <input
             className={styles.customInput}
             type={isPasswordVisible ? 'text' : 'password'}
             name="psw"
-            autoComplete="curent-password"
-            placeholder="******"
+            autoComplete="current-password"
+            placeholder=" "
             required
             minLength={6}
           />
-          {!isPasswordVisible ? (
+          <label className={styles['floating-label']}>Password</label>
+          {isPasswordVisible ? (
             <TfiEye
-              className={styles['password-icon']}
-              onClick={() => togglePasswordVisibility()}
+              title="Hide Password"
+              className={`${styles['password-icon']} ${styles['password-visible']}`}
+              onClick={togglePasswordVisibility}
             />
           ) : (
             <RxEyeClosed
               className={styles['password-icon']}
-              onClick={() => togglePasswordVisibility()}
+              onClick={togglePasswordVisibility}
             />
           )}
         </div>
+
         <div className={styles['remember-me']}>
           <input type="checkbox" ref={persisitenceRef} />
           <label>{lang.rememberMe}</label>
         </div>
+
         <div className={styles.btnContainer}>
           <button type="submit">{lang.login}</button>
           <button
@@ -93,10 +98,10 @@ const Login = () => {
             {lang.forgetPassword}
           </button>
         </div>
+
         <div style={{ margin: '.5rem auto 0', display: 'flex', width: '100%' }}>
           <h5 style={{ margin: 'auto' }}>
-            {lang.dontHaveAccount}
-            <Link to="../signup">{lang.hereLink}</Link>
+            {lang.dontHaveAccount} <Link to="../signup">{lang.hereLink}</Link>
           </h5>
         </div>
       </form>
