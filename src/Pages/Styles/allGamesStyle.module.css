@@ -5,7 +5,7 @@
 
 .allGamesSection {
   padding: 50px 20px;
-  background-color: #282a36;
+  background-color: #1e1e2e;
   text-align: center;
   margin: 0 10rem 2rem;
   border-radius: 30px;
@@ -27,6 +27,9 @@
   max-width: 1200px;
   margin: 0 auto;
   justify-content: center;
+  background-color: #282a36;
+  padding: 1rem 3rem;
+  border-radius: 30px;
 }
 
 .allGameCard {
@@ -35,29 +38,16 @@
   align-items: center;
   background-color: #1e1e2e;
   padding: 20px;
-  border-radius: 30px;
+  border-radius: 20px; /* Lágyabb szegélyek */
   text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease,
+    background-color 0.3s ease;
   position: relative;
   overflow: hidden;
   cursor: pointer;
   min-height: var(--min-height);
   gap: var(--content-gap);
-  border-bottom: 1px solid #50fa7b;
-}
-
-.allGameCard:hover:after {
-  position: absolute;
-  content: 'PLAY';
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(45deg);
-  color: #50fa7b;
-  font-size: 2rem;
-  font-weight: 800;
-  text-wrap: break-word;
-  text-shadow: 2px 2px 4px rgba(241, 5, 5, 0.7),
-    -2px -2px 4px rgba(240, 6, 6, 0.7);
+  border-bottom: 2px solid #50fa7b; /* Finomabb, zöld szegély */
 }
 
 .imageContainer {
@@ -94,9 +84,24 @@
 }
 
 .allGameCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
-  /* border-bottom: 1px solid red; */
+  transform: translateY(-8px);
+  box-shadow: 0 10px 15px rgba(255, 255, 255, 0.3);
+  background-color: #282a36;
+}
+
+.allGameCard:hover:after {
+  position: absolute;
+  content: 'PLAY';
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  color: #50fa7b;
+  font-size: 2rem;
+  font-weight: 800;
+  text-wrap: break-word;
+  text-shadow: 2px 2px 4px rgba(241, 5, 5, 0.7),
+    -2px -2px 4px rgba(240, 6, 6, 0.7);
+  animation: glow 1s ease-in-out infinite alternate;
 }
 
 .description {
@@ -116,7 +121,7 @@
   align-items: center;
   background-color: #1e1e2e;
   padding: 20px;
-  border-radius: 30px;
+  border-radius: 20px;
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.3s ease;
   position: relative;
@@ -149,9 +154,29 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(45deg);
-  color: red;
-  font-size: 2rem;
+  color: #ff5555;
+  font-size: 2.5rem;
   font-weight: 800;
   text-wrap: break-word;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7), -2px -2px 4px rgba(0, 0, 0, 0.7);
+  animation: shake 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 2px 2px 4px rgba(241, 5, 5, 0.7),
+      -2px -2px 4px rgba(240, 6, 6, 0.7);
+  }
+  100% {
+    text-shadow: 0 0 10px #50fa7b, 0 0 20px #50fa7b;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(45deg) translateY(-5px);
+  }
 }

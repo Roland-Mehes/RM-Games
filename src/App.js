@@ -1,16 +1,18 @@
 import './index.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { LanguageProvider } from './context/LanguageContext.js';
+import { LanguageProvider } from './context/LanguageContext';
 import Header from './components/Header/Header';
-import Signup from './Pages/signup.jsx';
-import Login from './Pages/login.jsx';
-import Wordle from './components/Games/Wordle/Game.js';
-import Sudoku from './Pages/Sudoku.jsx';
-import Records from './components/Records/Records.js';
+import Signup from './Pages/signup';
+import Login from './Pages/login';
+import Wordle from './components/Games/Wordle/Game';
+import Sudoku from './Pages/Sudoku';
+import Records from './components/Records/Records';
 import Home from './Pages/Home';
 import Footer from './components/footer/footer';
-import Hangman from './Pages/Hangman.js';
-import AllGames from './Pages/AllGames.jsx';
+import Hangman from './Pages/Hangman';
+import AllGames from './Pages/AllGames';
+import TicTacToe from './Pages/TicTacToe';
+import TicTacToeGame from './components/Games/TicTacToe/Game/Game';
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
           <Route path="/Wordle" element={<Wordle />} />
           <Route path="/Sudoku" element={<Sudoku />} />
           <Route path="/Hangman" element={<Hangman />} />
+          <Route path="/TicTacToe" element={<TicTacToe />} />
+          <Route path="/TicTacToeGame" element={<TicTacToeGame />} />
         </Routes>
         <Footer />
       </Router>

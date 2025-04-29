@@ -14,13 +14,20 @@ import { useHangmanGame } from '../components/Games/Hangman/customHooks/useHangm
 import useFireworks from '../components/customHooks/useFireworks';
 
 function Hangman() {
-  const { languageData, isLoggedIn, userName, languages, selectedLanguage } =
-    Ctx();
+  const {
+    languages,
+    selectedLanguage,
+    isLoggedIn,
+    userName,
+
+    languageData,
+  } = Ctx();
   const { selectedWords } = languageData;
   const randomWord = useRandomWordGenerator();
 
   const [wordToGuess, setWordToGuess] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [hint, setHint] = useState(false);
   const { lang } = languages[selectedLanguage];
   const { userStats, setUserStats } = useFirebase(
     userName,
@@ -30,6 +37,7 @@ function Hangman() {
     },
     'hangman'
   );
+
   const {
     guessedLetters,
     isWinner,
@@ -47,11 +55,18 @@ function Hangman() {
     }
   }, [selectedWords, randomWord]);
 
-  console.log(wordToGuess);
-
   return (
     <>
       <div className="main-container">
+        {/* Hint */}
+        <div className="hint">
+          <p onClick={() => setHint(!hint)}>
+            {hint === false ? 'Show' : 'Hide'}
+          </p>
+          {hint && <span>{wordToGuess}</span>}
+        </div>
+
+        {/* Hangman Container */}
         <div className="hangman-container">
           <div className="hangman-header">
             <div className="help">
@@ -61,7 +76,7 @@ function Hangman() {
               />
             </div>
             {isLoggedIn && (
-              <WinLose game="hangman" win="true" userStats={userStats} />
+              <WinLose game="hangman" win={true} userStats={userStats} />
             )}
             {isWinner && (
               <h6 style={{ fontFamily: `'Risque',serif'`, color: 'green' }}>
@@ -74,7 +89,7 @@ function Hangman() {
               </h6>
             )}
             {isLoggedIn && (
-              <WinLose game="hangman" lose="true" userStats={userStats} />
+              <WinLose game="TicTacToe" lose={true} userStats={userStats} />
             )}
             <div className="refresh-button">
               <HiOutlineRefresh

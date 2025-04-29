@@ -116,12 +116,12 @@ function Hangman() {
               />
             </div>
             {isLoggedIn && (
-              <WinLose game="hangman" win="true" userStats={userStats} />
+              <WinLose game="hangman" win={true} userStats={userStats} />
             )}
             {isWinner && 'WINNER - Refresh to try again '}
             {isLoser && 'Nice Try '}
             {isLoggedIn && (
-              <WinLose game="hangman" lose="true" userStats={userStats} />
+              <WinLose game="hangman" lose={true} userStats={userStats} />
             )}
             <div className="refresh-button">
               <HiOutlineRefresh

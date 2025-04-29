@@ -1,0 +1,49 @@
+.mainContainer {
+  display: grid;
+  align-items: center;
+  row-gap: 10px;
+  color: var(--special-color);
+}
+
+.scoreContainer {
+  display: flex;
+  gap: 15px;
+  padding: 0 2rem;
+}
+
+.score {
+  font-size: 26px;
+  letter-spacing: 1.5px;
+}
+
+.firstPlayer,
+.secondPlayer {
+  padding: 10px 15px;
+  border-radius: 15px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-wrap: nowrap;
+  font-size: 16px;
+  letter-spacing: 0.8px;
+}
+
+.firstPlayer {
+  background-color: var(--primary-blue);
+}
+
+.secondPlayer {
+  background-color: var(--primary-orange);
+}
+
+.tieContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  background-color: var(--secondary-bg-color);
+  padding: 10px 0px;
+  gap: 10px;
+}

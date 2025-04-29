@@ -19,6 +19,7 @@ const Wordle = () => {
   const [testMode, setTestMode] = useState(false);
   const [isWinner, setIsWinner] = useState(false);
   const [isLoser, setIsLoser] = useState(false);
+  const [hint, setHint] = useState(false);
 
   const { selectedLanguage, languageData, languages, isLoggedIn, userName } =
     Ctx();
@@ -42,8 +43,6 @@ const Wordle = () => {
     selectedWords?.length > 0
       ? selectedWords[Math.floor(Math.random() * selectedWords.length)]
       : '';
-
-  console.log(solution);
 
   // Gépelt betűk kezelése
   const handleType = useCallback(
@@ -132,6 +131,7 @@ const Wordle = () => {
     setIsGameOver(false);
     setCurrentGuess('');
     setMsg('');
+    setIsWinner(false);
     setIsError(Array(6).fill(false));
   };
 
@@ -143,6 +143,13 @@ const Wordle = () => {
   return (
     <>
       <div className="board-container">
+        {/* Hint */}
+        <div className="hint">
+          <p onClick={() => setHint(!hint)}>
+            {hint === false ? 'Show' : 'Hide'}
+          </p>
+          {hint && <span>{solution}</span>}
+        </div>
         <div className="board">
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <div className="help">

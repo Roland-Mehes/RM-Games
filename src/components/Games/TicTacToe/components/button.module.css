@@ -1,0 +1,70 @@
+.customButton {
+  font-size: 20px;
+  letter-spacing: 1.25px;
+  font-weight: var(--ff-bold);
+  color: var(--primary-white);
+
+  border: none;
+  border-radius: 15px;
+  background-color: var(--primary-blue);
+  padding: 0 35px;
+  height: 67px;
+
+  display: grid;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 5px 0 0 var(--third-bg-color);
+  font-family: 'Risque', cursive;
+}
+
+.customButton:hover {
+  background-color: var(--primary-azure);
+}
+
+.customModalButton {
+  display: grid;
+  align-content: center;
+
+  height: 52px;
+  padding: 30px;
+  border-radius: 15px;
+  background-color: var(--primary-blue);
+  border: none;
+  border-bottom: 3px solid var(--third-bg-color);
+
+  font-family: 'Risque', cursive;
+  color: var(--primary-white);
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-weight: var(--ff-bold);
+
+  cursor: pointer;
+}
+
+.customModalButton:hover {
+  background-color: #38a3ff;
+}
+
+.quitModalButton {
+  display: grid;
+  align-content: center;
+
+  height: 52px;
+  padding: 30px;
+  border-radius: 15px;
+  background-color: var(--special-color);
+  border: none;
+  border-bottom: 3px solid var(--third-bg-color);
+
+  font-family: 'Risque', cursive;
+  color: var(--third-bg-color);
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-weight: var(--ff-bold);
+
+  cursor: pointer;
+}
+
+.quitModalButton:hover {
+  background-color: #b8deff;
+}

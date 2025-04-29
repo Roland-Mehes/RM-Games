@@ -37,15 +37,15 @@ const GamesSection = () => {
           link="/sudoku"
           BtnDisabled={true}
         /> */}
-        {/* <GameCard
-          title="Memory"
+        <GameCard
+          title="TicTacToe"
           imgSrc={'./img/memory-game2.png'}
           imgWidth="70px"
           imgHeight="70px"
           // description=""
-          link="/memory"
+          link="/TicTacToe"
           BtnDisabled={true}
-        /> */}
+        />
       </div>
     </section>
   );

@@ -14,6 +14,21 @@ body {
 :root {
   --main-color: rgba(30, 30, 46, 0.9);
   --second-color: rgb(40, 42, 54);
+
+  /* TiCTaCToe Colors*/
+
+  --primary-blue: #008aff;
+  --primary-azure: #38a3ff;
+  --primary-orange: #ffaa00;
+  --primary-white: #fff;
+  --primary-bg-color: #0c2233;
+  --secondary-bg-color: #0e2c42;
+  --third-bg-color: #091a27;
+
+  --input-placeholder: #325471;
+  --special-color: #d6ecff;
+
+  --ff-bold: 500;
 }
 
 * {

@@ -1,6 +1,11 @@
 .scoreMSG {
   font-size: 16px;
   font-family: 'Risque', serif;
-  color: white;
+  color: var(--special-color);
   margin-top: 0.5rem;
+}
+
+.ticTacToe {
+  font-size: 26px;
+  letter-spacing: 1.5px;
 }
